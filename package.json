@@ -1,0 +1,41 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "db:reset": "npx tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+    "build": "tsc --project tsconfig.json",
+    "prestart": "npm run build && npm run db:reset",
+    "start": "node ./build/server.js",
+    "predev": "npm run db:reset",
+    "dev": "tsnd --watch \"./src/**\" --transpile-only ./src/server.ts",
+    "lint": "eslint ./src --ext .ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.1",
+    "express-async-errors": "^3.1.1",
+    "pg": "^8.11.3",
+    "sequelize": "^6.37.1"
+  },
+  "devDependencies": {
+    "@types/cors": "2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.15",
+    "@types/pg": "^8.11.4",
+    "@types/sequelize": "^4.28.10",
+    "eslint": "7.32.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-airbnb-typescript": "15.0.0",
+    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-mocha": "9.0.0",
+    "eslint-plugin-sonarjs": "0.10.0",
+    "sequelize-cli": "^6.2.0",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^5.4.3"
+  }
+}
