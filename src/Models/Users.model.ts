@@ -3,13 +3,13 @@ import IUsersModel from '../Interfaces/Users/IUsersModel';
 import SequelizeUsers from '../database/models/sequelizeUsers';
 
 export default class UsersModel implements IUsersModel {
+  private model = SequelizeUsers;
+
   async findAll(): Promise<IUsers[] | null> {
     const findAllUsers = await this.model.findAll();
     if (findAllUsers.length === 0) return null;
     return findAllUsers;
   }
-
-  private model = SequelizeUsers;
 
   async findById(id: number): Promise<IUsers | null> {
     const findUser = await this.model.findByPk(id);

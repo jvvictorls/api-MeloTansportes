@@ -48,4 +48,11 @@ export default class UsersController {
     if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
     return res.status(204).json(data);
   }
+
+  async login(req: Request, res: Response) {
+    const { email, password } = req.body;
+    const { status, data } = await this.usersService.login({ email, password });
+    if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
+    return res.status(204).json(data);
+  }
 }

@@ -1,11 +1,14 @@
 import UsersModel from '../Models/Users.model';
-import { ServiceResponse } from '../Interfaces/Users/ServiceResponse';
+import { ServiceMessage, ServiceResponse } from '../Interfaces/Users/ServiceResponse';
 import IUsers from '../Interfaces/Users/IUsers';
 import IUsersModel from '../Interfaces/Users/IUsersModel';
+import ILogin from '../Interfaces/Users/ILogin';
+import JWT from '../Utils/JWT';
 
 export default class UsersService {
   constructor(
     private usersModel: IUsersModel = new UsersModel(),
+    private jwt = JWT,
   ) {}
 
   async findAll(): Promise<ServiceResponse<IUsers[]>> {
@@ -105,5 +108,18 @@ export default class UsersService {
       status: 'SUCCESSFUL',
       data: { deleted: true },
     };
+  }
+
+  async login(user: ILogin): Promise<ServiceResponse<ServiceMessage | string>> {
+    const userExists = await this.usersModel.findByEmail(user.email);
+    if (!userExists) return { status: 'INVALID_DATA', data: { message: 'User dont exists' } };
+    if (userExists.password !== user.password) {
+      return { status: 'INVALID_DATA',
+        data: { message: 'incorrect password' } };
+    }
+    const { email } = user;
+    const token = this.jwt.sign({ email });
+
+    return { status: 'SUCCESSFUL', data: token };
   }
 }

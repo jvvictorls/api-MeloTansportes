@@ -8,6 +8,8 @@ class App {
   constructor() {
     this.app = express();
 
+    this.app.use(express.json());
+
     this.routes();
 
     this.config();
@@ -21,7 +23,6 @@ class App {
       next();
     };
 
-    this.app.use(express.json());
     this.app.use(accessControl);
   }
 
