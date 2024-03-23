@@ -10,9 +10,9 @@ class App {
 
     this.app.use(express.json());
 
-    this.routes();
-
     this.config();
+
+    this.routes();
   }
 
   private config():void {
