@@ -14,18 +14,19 @@ export default class UsersModel implements IUsersModel {
   async findById(id: number): Promise<IUsers | null> {
     const findUser = await this.model.findByPk(id);
     if (!findUser) return null;
-    return findUser;
+    return findUser.dataValues;
   }
 
   async findByEmail(email: string): Promise<IUsers | null> {
     const findUser = await this.model.findOne({ where: { email } });
     if (!findUser) return null;
-    return findUser;
+    const { dataValues } = findUser;
+    return dataValues;
   }
 
   async create(user: IUsers): Promise<IUsers> {
-    const createUser = await this.model.create(user);
-    return createUser;
+    const { dataValues } = await this.model.create(user);
+    return dataValues;
   }
 
   async update(id: number, user: IUsers): Promise<IUsers | null> {

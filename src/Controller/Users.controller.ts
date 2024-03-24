@@ -46,13 +46,13 @@ export default class UsersController {
     const { id } = req.params;
     const { status, data } = await this.usersService.delete(Number(id));
     if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
-    return res.status(204).json(data);
+    return res.status(200).json(data);
   }
 
   async login(req: Request, res: Response) {
     const { email, password } = req.body;
     const { status, data } = await this.usersService.login({ email, password });
     if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
-    return res.status(204).json(data);
+    return res.status(200).json(data);
   }
 }
