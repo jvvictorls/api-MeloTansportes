@@ -11,6 +11,7 @@ class SequelizeCollaborators extends Model<InferAttributes<SequelizeCollaborator
 InferCreationAttributes<SequelizeCollaborators>> {
   declare id: CreationOptional<number>;
   declare name: string;
+  declare address: string;
 }
 
 SequelizeCollaborators.init({
@@ -24,6 +25,10 @@ SequelizeCollaborators.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
+  address: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
 }, {
   underscored: true,
   sequelize: db,
