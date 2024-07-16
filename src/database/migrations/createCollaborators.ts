@@ -17,8 +17,19 @@ export default {
       address: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      phone: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      routeId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'routes',
+          key: 'id'
       }
-    })
+    }})
   },
   down(queryInterface: QueryInterface) {
     return queryInterface.dropTable('collaborators')

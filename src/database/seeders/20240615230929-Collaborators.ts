@@ -8,11 +8,15 @@ module.exports = {
    await queryInterface.bulkInsert('collaborators', [
     {
       name: 'Fernanda Silva',
-      address: 'Ecopark Iv, Anil'
+      address: 'Ecopark Iv, Anil',
+      phone: '98999999999',
+      routeId: 1
     },
     {
       name: 'Olívia Lopes', 
       address: 'Rua Oswaldo Cruz, Anil',
+      phone: '98999999999',
+      routeId: 1
     }
    ])
   },
