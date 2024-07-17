@@ -12,6 +12,8 @@ InferCreationAttributes<SequelizeCollaborators>> {
   declare id: CreationOptional<number>;
   declare name: string;
   declare address: string;
+  declare phone: string;
+  declare routeId: number;
 }
 
 SequelizeCollaborators.init({
@@ -28,10 +30,25 @@ SequelizeCollaborators.init({
   address: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
+  phone: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  routeId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'routes',
+      key: 'id',
+  },
+},
+  
 }, {
   underscored: true,
   sequelize: db,
   modelName: 'collaborators',
   timestamps: false,
 });
+
+export default SequelizeCollaborators;

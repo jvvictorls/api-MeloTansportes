@@ -25,10 +25,6 @@ export default {
       routeId: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        references: {
-          model: 'routes',
-          key: 'id'
-      }
     }})
   },
   down(queryInterface: QueryInterface) {
