@@ -6,6 +6,7 @@ import {
   CreationOptional,
 } from 'sequelize';
 import db from '.';
+
 import SequelizeCollaborators from './SequelizeCollaborators';
 
 
@@ -23,10 +24,6 @@ class SequelizeRoutes extends Model<InferAttributes<SequelizeRoutes>, InferCreat
   declare maxCollaborators: number;
 
   declare currentCollaborators: number;
-
-  declare createdAt: Date;
-
-  declare updatedAt: Date;
 
 }
 
@@ -51,7 +48,12 @@ SequelizeRoutes.init({
   },
   collaborators: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    references: {
+      model: 'collaborators',
+      key: 'name',
+    }
+
   },
   maxCollaborators: {
     type: DataTypes.INTEGER,
@@ -60,20 +62,15 @@ SequelizeRoutes.init({
   currentCollaborators: {
     type: DataTypes.INTEGER,
     allowNull: false
-  },
-  createdAt: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  updatedAt: {
-    type: DataTypes.DATE,
-    allowNull: false,
   }
 }, {
   sequelize: db,
   modelName: 'routes',
+  underscored: true,
+  timestamps: false,
 });
 
-SequelizeRoutes.hasMany(SequelizeCollaborators, {foreignKey: 'routeId', as: 'collaborators'});
+SequelizeRoutes.hasMany(SequelizeCollaborators, { foreignKey: 'routeId', as: 'route' });
+
 
 export default SequelizeRoutes;

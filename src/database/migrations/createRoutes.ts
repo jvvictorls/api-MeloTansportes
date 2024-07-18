@@ -28,19 +28,13 @@ export default {
     },
     maxCollaborators: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      field: 'max_collaborators'
     },
     currentCollaborators: {
       type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      allowNull:false,
+      allowNull: false,
+      field: 'current_collaborators'
     }
     })
   },

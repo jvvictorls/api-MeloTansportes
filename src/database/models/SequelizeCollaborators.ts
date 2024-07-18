@@ -41,14 +41,15 @@ SequelizeCollaborators.init({
     references: {
       model: 'routes',
       key: 'id',
-  },
-},
-  
+    },
+    field: 'route_id',
+},  
 }, {
-  underscored: true,
   sequelize: db,
   modelName: 'collaborators',
+  underscored: true,
   timestamps: false,
 });
+
 
 export default SequelizeCollaborators;
