@@ -5,7 +5,8 @@ type ServiceResponseErrorType = 'INVALID_DATA'
 | 'NOT_FOUND'
 | 'CONFLICT'
 | 'INTERNAL_SERVER_ERROR'
-| 'UNPROCESSABLE_ENTITY';
+| 'UNPROCESSABLE_ENTITY'
+| 'BAD_REQUEST';
 
 export type ServiceResponseError = {
   status: ServiceResponseErrorType,
