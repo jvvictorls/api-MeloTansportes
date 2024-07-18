@@ -3,4 +3,5 @@ export default interface IUsers {
   name: string,
   email: string,
   password: string,
+  type: 'admin' | 'user' | 'driver' | 'superadmin'
 }

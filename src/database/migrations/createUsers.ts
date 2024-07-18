@@ -21,6 +21,10 @@ export default {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            type: {
+                type: DataTypes.ENUM('admin', 'user', 'driver', 'superadmin'),
+                allowNull: false,
+            }
         });
     },  
     down(queryInterface: QueryInterface,) {
