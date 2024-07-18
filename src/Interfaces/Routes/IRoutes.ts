@@ -6,6 +6,4 @@ export interface IRoutes {
   collaborators: string,
   maxCollaborators: number,
   currentCollaborators: number,
-  createdAt: Date,
-  updatedAt: Date,
 }
