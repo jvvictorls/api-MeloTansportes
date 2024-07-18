@@ -22,10 +22,6 @@ export default {
       type: DataTypes.STRING,
       allowNull: false
     },
-    collaborators: {
-      type: DataTypes.STRING,
-      allowNull: false 
-    },
     maxCollaborators: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -35,7 +31,17 @@ export default {
       type: DataTypes.INTEGER,
       allowNull: false,
       field: 'current_collaborators'
-    }
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'created_at'
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      field: 'updated_at'
+    },
     })
   },
 

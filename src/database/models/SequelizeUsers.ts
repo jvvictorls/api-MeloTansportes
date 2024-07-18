@@ -13,6 +13,7 @@ InferCreationAttributes<SequelizeUsers>> {
   declare name: string;
   declare email: string;
   declare password: string;
+  declare type: 'admin' | 'user' | 'driver' | 'superadmin';
 }
 
 SequelizeUsers.init({
@@ -34,6 +35,10 @@ SequelizeUsers.init({
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
+  },
+  type: {
+    type: DataTypes.ENUM('admin', 'user', 'driver', 'superadmin'),
+    allowNull: false,
   },
 }, {
   underscored: true,

@@ -18,12 +18,14 @@ class SequelizeRoutes extends Model<InferAttributes<SequelizeRoutes>, InferCreat
   declare driver: string;
 
   declare client: string;
-  
-  declare collaborators: string;
 
   declare maxCollaborators: number;
 
   declare currentCollaborators: number;
+
+  declare createdAt: Date;
+
+  declare updatedAt: Date;
 
 }
 
@@ -46,15 +48,6 @@ SequelizeRoutes.init({
     type: DataTypes.STRING,
     allowNull: false
   },
-  collaborators: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    references: {
-      model: 'collaborators',
-      key: 'name',
-    }
-
-  },
   maxCollaborators: {
     type: DataTypes.INTEGER,
     allowNull: false
@@ -62,8 +55,18 @@ SequelizeRoutes.init({
   currentCollaborators: {
     type: DataTypes.INTEGER,
     allowNull: false
-  }
-}, {
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    field: 'created_at'
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    field: 'updated_at'
+  },
+  }, {
   sequelize: db,
   modelName: 'routes',
   underscored: true,

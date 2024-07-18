@@ -51,5 +51,4 @@ SequelizeCollaborators.init({
   timestamps: false,
 });
 
-
 export default SequelizeCollaborators;
