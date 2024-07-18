@@ -21,19 +21,4 @@ export default class RoutesService {
       data: route
     };
   }
-  
-  async addOneCollaborator(id: number, collaborators: string): Promise<ServiceResponse<IRoutes>> {
-    const route = await this.routesModel.addOneCollaborator(id, collaborators);
-    if (!route) {
-      return {
-        status: 'BAD_REQUEST',
-        data: { message: 'Collaborator not added' }
-      };
-    }
-    return {
-      status: 'SUCCESSFUL',
-      data: route
-    };
-  }
-
 }

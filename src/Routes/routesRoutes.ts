@@ -7,10 +7,4 @@ router.get(
   "/:id",
   (req: Request, res: Response) => routesController.getOneRoute(req, res)
 );
-
-router.post(
-  "/:id/addCollaborator",
-  (req: Request, res: Response) => routesController.addOneCollaborator(req, res)
-);
-
 export default router;

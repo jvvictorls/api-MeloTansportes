@@ -13,12 +13,4 @@ export default class RoutesController {
     if (status !== "SUCCESSFUL") return res.status(mapStatusHTTP(status)).json(data);
     return res.status(200).json(data);
   }
-
-  async addOneCollaborator(req: Request, res: Response) {
-    const { id } = req.params;
-    const { collaborators } = req.body;
-    const { status, data } = await this.routesService.addOneCollaborator(Number(id), collaborators);
-    if (status !== "SUCCESSFUL") return res.status(mapStatusHTTP(status)).json(data);
-    return res.status(200).json(data);
-  }
 }
