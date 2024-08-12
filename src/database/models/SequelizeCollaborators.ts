@@ -14,6 +14,11 @@ InferCreationAttributes<SequelizeCollaborators>> {
   declare address: string;
   declare phone: string;
   declare routeId: number;
+  declare firm: 'Eurochem' | 'Cibra';
+  declare department: 'ADM' | 'PRODUÇÃO' | 'HSE' | 'MANUTENÇÃO' | 'QUALIDADE' | 'PCP' | 'RH' | 'LOGÍSTICA' | 'CORPORATIVO';
+  declare type: 'SUPERVISOR' | 'COORDENADOR' | 'COLABORADOR' | 'GERENTE' | 'DIRETOR' | 'ESTAGIÁRIO' | 'APRENDIZ' | 'TERCEIRIZADO' | 'OUTRO';
+  declare createdAt: Date;
+  declare updatedAt: Date;
 }
 
 SequelizeCollaborators.init({
@@ -43,12 +48,33 @@ SequelizeCollaborators.init({
       key: 'id',
     },
     field: 'route_id',
-},  
+  },
+  firm: {
+    type: DataTypes.ENUM('Eurochem', 'Cibra'),
+    allowNull: false,
+  },
+  department: {
+    type: DataTypes.ENUM('ADM', 'PRODUÇÃO', 'HSE', 'MANUTENÇÃO', 'QUALIDADE', 'PCP', 'RH', 'LOGÍSTICA', 'CORPORATIVO'),
+    allowNull: false,
+  },
+  type: {
+    type: DataTypes.ENUM('SUPERVISOR', 'COORDENADOR', 'COLABORADOR', 'GERENTE', 'DIRETOR', 'ESTAGIÁRIO', 'APRENDIZ', 'TERCEIRIZADO', 'OUTRO'),
+    allowNull: false,
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    field: 'created_at',
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    field: 'updated_at',
+  }  
 }, {
   sequelize: db,
   modelName: 'collaborators',
   underscored: true,
-  timestamps: false,
 });
 
 export default SequelizeCollaborators;
