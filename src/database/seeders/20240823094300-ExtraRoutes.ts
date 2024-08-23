@@ -1,7 +1,7 @@
 import { QueryInterface } from 'sequelize';
 
 export async function up(queryInterface: QueryInterface) {
-  await queryInterface.bulkInsert('extraRoutes', [
+  await queryInterface.bulkInsert('extra_routes', [
     {
       date: new Date(),
       cost_center: 'Development',
@@ -24,5 +24,5 @@ export async function up(queryInterface: QueryInterface) {
 }
 
 export async function down(queryInterface: QueryInterface) {
-  await queryInterface.bulkDelete('extraRoutes', {});
+  await queryInterface.bulkDelete('extra_routes', {});
 }

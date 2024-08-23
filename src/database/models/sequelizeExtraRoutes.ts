@@ -12,6 +12,8 @@ import SequelizeCollaborators from './SequelizeCollaborators';
 class SequelizeExtraRoutes extends Model<InferAttributes<SequelizeExtraRoutes>, InferCreationAttributes<SequelizeExtraRoutes>> {
   declare id: CreationOptional<number>;
   declare userId: number;
+  declare date: Date;
+  declare costCenter: string;
   declare driver: string;
   declare client: string;
   declare createdAt: Date;
@@ -24,6 +26,15 @@ SequelizeExtraRoutes.init({
     autoIncrement: true,
     primaryKey: true,
     allowNull: false,
+  },
+  date: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  costCenter: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    field: 'cost_center',
   },
   userId: {
     type: DataTypes.INTEGER,
@@ -50,7 +61,7 @@ SequelizeExtraRoutes.init({
   }
 }, {
   sequelize: db,
-  tableName: 'extra_route',
+  tableName: 'extra_routes',
   underscored: true,
   timestamps: true,
 });
@@ -58,7 +69,7 @@ SequelizeExtraRoutes.init({
 SequelizeExtraRoutes.belongsTo(SequelizeUsers, {foreignKey: 'userId', as: 'user'});
 
 SequelizeExtraRoutes.belongsToMany(SequelizeCollaborators, {
-  through: 'extra_route_collaborators',
+  through: 'extra_routes_collaborators',
   foreignKey: 'extra_route_id',
   as: 'collaborators',
 });
@@ -67,3 +78,5 @@ SequelizeCollaborators.belongsToMany(SequelizeExtraRoutes, {
   foreignKey: 'collaborator_id',
   as: 'extraRoutes',
 });
+
+export default SequelizeExtraRoutes;

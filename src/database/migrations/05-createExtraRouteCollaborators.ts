@@ -2,13 +2,13 @@ import { QueryInterface, DataTypes } from 'sequelize'
 
 module.exports = {
   async up(queryInterface: QueryInterface) {
-    await queryInterface.createTable('extraRouteCollaborators', {
+    await queryInterface.createTable('extra_routes_collaborators', {
       extraRouteId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         field: 'extra_route_id',
         references: {
-          model: 'extraRoutes',
+          model: 'extra_routes',
           key: 'id'
         },
         onUpdate: 'CASCADE',
@@ -39,6 +39,6 @@ module.exports = {
   },
 
   async down (queryInterface: QueryInterface) {
-    await queryInterface.dropTable('extraRouteCollaborators')
+    await queryInterface.dropTable('extra_routes_collaborators')
   }
 }

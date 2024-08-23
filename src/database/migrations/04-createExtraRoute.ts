@@ -5,7 +5,7 @@ import {
 
 module.exports = {
   async up(queryInterface: QueryInterface) {
-    await queryInterface.createTable('extraRoutes', {
+    await queryInterface.createTable('extra_routes', {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,

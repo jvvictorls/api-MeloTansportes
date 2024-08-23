@@ -1,7 +1,7 @@
 import { QueryInterface } from 'sequelize';
 
 export async function up(queryInterface: QueryInterface) {
-  await queryInterface.bulkInsert('extraRouteCollaborators', [
+  await queryInterface.bulkInsert('extra_routes_collaborators', [
     {
       extra_route_id: 1, // Supondo que esta rota extra foi solicitada por Alice Johnson
       collaborator_id: 1, // Supondo que Carlos Diaz é o collaborator_id 1
@@ -24,5 +24,5 @@ export async function up(queryInterface: QueryInterface) {
 }
 
 export async function down(queryInterface: QueryInterface) {
-  await queryInterface.bulkDelete('extraRouteCollaborators', {});
+  await queryInterface.bulkDelete('extra_routes_collaborators', {});
 }
