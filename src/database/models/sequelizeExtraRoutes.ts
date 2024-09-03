@@ -4,6 +4,7 @@ import {
   CreationOptional,
   InferAttributes,
   InferCreationAttributes,
+  NonAttribute
 } from 'sequelize';
 import db from '.';
 import SequelizeUsers from './SequelizeUsers';
@@ -11,13 +12,29 @@ import SequelizeCollaborators from './SequelizeCollaborators';
 
 class SequelizeExtraRoutes extends Model<InferAttributes<SequelizeExtraRoutes>, InferCreationAttributes<SequelizeExtraRoutes>> {
   declare id: CreationOptional<number>;
-  declare userId: number;
+  declare userId: Number;
   declare date: Date;
-  declare costCenter: string;
-  declare driver: string;
-  declare client: string;
+  declare costCenter: String;
+  declare driver: String;
+  declare client: String;
   declare createdAt: Date;
   declare updatedAt: Date;
+  declare collaborators: NonAttribute<[
+    {
+      id: Number;
+      name: String;
+      extra_routes_collaborators: {
+        createdAt: Date;
+        updatedAt: Date;
+        extra_route_id: Number;
+        collaboratorId: Number;
+      }
+    }
+  ]>;
+  declare user: NonAttribute<{
+    id: Number;
+    name: String;
+  }>;
 }
 
 SequelizeExtraRoutes.init({
