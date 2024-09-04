@@ -1,4 +1,3 @@
-import { Error } from "sequelize";
 import ExtraRoutesService from "../Services/ExtraRoutes.service";
 
 export default class ExtraRoutesController {
@@ -12,15 +11,6 @@ export default class ExtraRoutesController {
     try {
       const newExtraRoute = await this.extraRoutesService.createExtraRoute(req.body);
       res.status(201).json(newExtraRoute);
-    } catch (error: any) {
-      res.status(400).json({ error: error.message });
-    }
-  }
-
-  async getExtraRoutes(req: any, res: any): Promise<any> {
-    try {
-      const extraRoutes = await this.extraRoutesService.getExtraRoutes();
-      res.status(200).json(extraRoutes);
     } catch (error: any) {
       res.status(400).json({ error: error.message });
     }

@@ -1,18 +1,18 @@
 export default interface IExtraRoutes {
-  id: Number,
+  id: number,
   date: Date,
-  costCenter: String,
-  userId: Number,
-  driver: String,
-  client: String,
+  costCenter: string,
+  userId: number,
+  driver: string,
+  client: string,
   createdAt: Date,
   updatedAt: Date,
   collaborators: {
-      id: Number,
-      name: String,
+      id: number,
+      name: string,
     }[],
   user: {
-    id: Number | null,
-    name: String | null
+    id: number,
+    name: string
   }
 }

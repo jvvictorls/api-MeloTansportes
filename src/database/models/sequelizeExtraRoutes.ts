@@ -12,28 +12,28 @@ import SequelizeCollaborators from './SequelizeCollaborators';
 
 class SequelizeExtraRoutes extends Model<InferAttributes<SequelizeExtraRoutes>, InferCreationAttributes<SequelizeExtraRoutes>> {
   declare id: CreationOptional<number>;
-  declare userId: Number;
+  declare userId: number;
   declare date: Date;
-  declare costCenter: String;
-  declare driver: String;
-  declare client: String;
+  declare costCenter: string;
+  declare driver: string;
+  declare client: string;
   declare createdAt: Date;
   declare updatedAt: Date;
-  declare collaborators: NonAttribute<[
+  declare collaborators: NonAttribute<
     {
-      id: Number;
-      name: String;
+      id: number;
+      name: string;
       extra_routes_collaborators: {
         createdAt: Date;
         updatedAt: Date;
-        extra_route_id: Number;
-        collaboratorId: Number;
+        extra_route_id: number;
+        collaboratorId: number;
       }
-    }
-  ]>;
+    }[]
+  >;
   declare user: NonAttribute<{
-    id: Number;
-    name: String;
+    id: number;
+    name: string;
   }>;
 }
 
