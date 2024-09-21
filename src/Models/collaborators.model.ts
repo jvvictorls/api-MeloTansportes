@@ -14,4 +14,9 @@ export default class CollaboratorsModel {
     const newCollaborators = await this.model.bulkCreate(collaborators);
     return newCollaborators.map((collaborator) => collaborator.dataValues);
   }
+
+  async getAllCollaborators(): Promise<ICollaborators[]> {
+    const collaborators = await this.model.findAll();
+    return collaborators.map((collaborator) => collaborator.dataValues);
+  }
 }
