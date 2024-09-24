@@ -8,6 +8,7 @@ export async function up(queryInterface: QueryInterface) {
       user_id: 1, // Supondo que Alice Johnson é o userId 1
       driver: 'Carlos Diaz',
       client: 'Euorchem',
+      status: 'completed',
       created_at: new Date(),
       updated_at: new Date(),
     },
@@ -17,6 +18,7 @@ export async function up(queryInterface: QueryInterface) {
       user_id: 2, // Supondo que Bob Smith é o userId 2
       driver: 'Carlos Diaz',
       client: 'Euorchem',
+      status: 'completed',
       created_at: new Date(),
       updated_at: new Date(),
     },

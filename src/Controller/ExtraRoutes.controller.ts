@@ -1,4 +1,5 @@
 import ExtraRoutesService from "../Services/ExtraRoutes.service";
+import mapStatusHTTP from "../Utils/mapStatusHttp";
 
 export default class ExtraRoutesController {
   private extraRoutesService = new ExtraRoutesService();
@@ -9,8 +10,11 @@ export default class ExtraRoutesController {
 
   async createExtraRoute(req: any, res: any): Promise<any> {
     try {
-      const newExtraRoute = await this.extraRoutesService.createExtraRoute(req.body);
-      res.status(201).json(newExtraRoute);
+      const {status, data} = await this.extraRoutesService.createExtraRoute(req.body);
+      if(status !== 'CREATED') {
+        return res.status(mapStatusHTTP(status)).json({ error: data });
+      }
+      res.status(201).json(data);
     } catch (error: any) {
       res.status(400).json({ error: error.message });
     }

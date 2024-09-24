@@ -8,7 +8,7 @@ export default class ExtraRoutesService {
   async createExtraRoute(extraRoute: INewExtraRoute): Promise<ServiceResponse<INewExtraRoute>> {
     try {
       const newExtraRoute = await this.extraRoutesModel.createExtraRoute(extraRoute);
-      return { data: newExtraRoute, status: 'SUCCESSFUL' };
+      return { data: newExtraRoute, status: 'CREATED' };
     } catch (e: any) {
       return e.message;
     }

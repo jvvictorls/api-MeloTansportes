@@ -34,10 +34,14 @@ module.exports = {
       },
       driver: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       client: {
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      status: {
+        type: DataTypes.STRING,
+        defaultValue: 'pending',
         allowNull: false,
       },
       createdAt: {

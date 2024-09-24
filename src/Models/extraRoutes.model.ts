@@ -8,14 +8,16 @@ export default class ExtraRoutesModel {
   private model = SequelizeExtraRoutes;
 
   async createExtraRoute(data: INewExtraRoute): Promise<IExtraRoutes> {
+    console.log(data);
     try {
       const extraRoute = await this.model.create(
         {
-          date: new Date(),
+          date: data.date,
           costCenter: data.costCenter,
           userId: data.userId,
           driver: data.driver,
           client: data.client,
+          status: 'pending',
           createdAt: new Date(),
           updatedAt: new Date(),
         }
@@ -45,6 +47,7 @@ export default class ExtraRoutesModel {
         userId: extraRoute.userId,
         driver: extraRoute.driver,
         client: extraRoute.client,
+        status: extraRoute.status,
         createdAt: extraRoute.createdAt,
         updatedAt: extraRoute.updatedAt,
         collaborators: extraRoute.collaborators?.map(collaborator => ({
@@ -98,6 +101,7 @@ export default class ExtraRoutesModel {
         userId: extraRoute.userId,
         driver: extraRoute.driver,
         client: extraRoute.client,
+        status: extraRoute.status,
         createdAt: extraRoute.createdAt,
         updatedAt: extraRoute.updatedAt,
         collaborators: extraRoute.collaborators?.map(collaborator => ({

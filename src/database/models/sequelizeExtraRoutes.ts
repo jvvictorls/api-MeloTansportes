@@ -17,6 +17,7 @@ class SequelizeExtraRoutes extends Model<InferAttributes<SequelizeExtraRoutes>, 
   declare costCenter: string;
   declare driver: string;
   declare client: string;
+  declare status: string;
   declare createdAt: Date;
   declare updatedAt: Date;
   declare collaborators: NonAttribute<
@@ -60,10 +61,15 @@ SequelizeExtraRoutes.init({
   },
   driver: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   client: {
     type: DataTypes.STRING,
+    defaultValue: 'Eurochem',
+    allowNull: false,
+  },
+  status: {
+    type: DataTypes.STRING,
+    defaultValue: 'pending',
     allowNull: false,
   },
   createdAt: {

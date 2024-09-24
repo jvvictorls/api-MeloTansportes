@@ -6,6 +6,7 @@ interface INewExtraRoute {
   costCenter: string;
   driver: string;
   client: string;
+  status: string;
   collaborators: { id: number; name: string; }[];
   user: { id: number; name: string; };
 }

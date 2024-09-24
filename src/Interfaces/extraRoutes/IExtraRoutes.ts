@@ -5,6 +5,7 @@ export default interface IExtraRoutes {
   userId: number,
   driver: string,
   client: string,
+  status: string,
   createdAt: Date,
   updatedAt: Date,
   collaborators: {
