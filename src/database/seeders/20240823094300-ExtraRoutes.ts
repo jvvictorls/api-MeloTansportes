@@ -3,9 +3,12 @@ import { QueryInterface } from 'sequelize';
 export async function up(queryInterface: QueryInterface) {
   await queryInterface.bulkInsert('extra_routes', [
     {
+      origin: 'Fábrica',
+      destination: 'Residência',
       date: new Date(),
+      time: '08:00',
       cost_center: 'Development',
-      user_id: 1, // Supondo que Alice Johnson é o userId 1
+      user_id: 1, 
       driver: 'Carlos Diaz',
       client: 'Euorchem',
       status: 'completed',
@@ -13,11 +16,14 @@ export async function up(queryInterface: QueryInterface) {
       updated_at: new Date(),
     },
     {
+      origin: 'Residência',
+      destination: 'Fábrica',
       date: new Date(),
+      time: '20:00',
       cost_center: 'Design',
-      user_id: 2, // Supondo que Bob Smith é o userId 2
+      user_id: 2,
       driver: 'Carlos Diaz',
-      client: 'Euorchem',
+      client: 'Eurochem',
       status: 'completed',
       created_at: new Date(),
       updated_at: new Date(),

@@ -12,8 +12,11 @@ import SequelizeCollaborators from './SequelizeCollaborators';
 
 class SequelizeExtraRoutes extends Model<InferAttributes<SequelizeExtraRoutes>, InferCreationAttributes<SequelizeExtraRoutes>> {
   declare id: CreationOptional<number>;
+  declare origin: string;
+  declare destination: string;
   declare userId: number;
   declare date: Date;
+  declare time: string;
   declare costCenter: string;
   declare driver: string;
   declare client: string;
@@ -44,6 +47,18 @@ SequelizeExtraRoutes.init({
     autoIncrement: true,
     primaryKey: true,
     allowNull: false,
+  },
+  origin: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  destination: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  time: {
+    type: DataTypes.STRING,
+    allowNull: false
   },
   date: {
     type: DataTypes.DATE,

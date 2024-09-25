@@ -1,5 +1,7 @@
 export default interface IExtraRoutes {
   id: number,
+  origin: string,
+  destination: string,
   date: Date,
   costCenter: string,
   userId: number,
@@ -8,6 +10,7 @@ export default interface IExtraRoutes {
   status: string,
   createdAt: Date,
   updatedAt: Date,
+  time: string,
   collaborators: {
       id: number,
       name: string,

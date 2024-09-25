@@ -12,8 +12,11 @@ export default class ExtraRoutesModel {
     try {
       const extraRoute = await this.model.create(
         {
-          date: data.date,
+          origin: data.origin,
+          destination: data.destination,
+          time: data.time,
           costCenter: data.costCenter,
+          date: data.date,
           userId: data.userId,
           driver: data.driver,
           client: data.client,
@@ -42,7 +45,10 @@ export default class ExtraRoutesModel {
   
       const transformedExtraRoute: IExtraRoutes = {
         id: extraRoute.id,
+        origin: extraRoute.origin,
+        destination: extraRoute.destination,
         date: extraRoute.date,
+        time: extraRoute.time,
         costCenter: extraRoute.costCenter,
         userId: extraRoute.userId,
         driver: extraRoute.driver,
@@ -95,8 +101,11 @@ export default class ExtraRoutesModel {
       }
   
       const transformedExtraRoute: IExtraRoutes = {
+        origin: extraRoute.origin,
+        destination: extraRoute.destination,
         id: extraRoute.id,
         date: extraRoute.date,
+        time: extraRoute.time,
         costCenter: extraRoute.costCenter,
         userId: extraRoute.userId,
         driver: extraRoute.driver,

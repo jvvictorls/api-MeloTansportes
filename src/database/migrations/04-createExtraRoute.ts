@@ -12,10 +12,22 @@ module.exports = {
         primaryKey: true,
         allowNull: false,
       },
+      origin: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      destination: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       date: {
         type: DataTypes.DATE,
         allowNull: false,
-      },  
+      },
+      time: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       costCenter: {
         type: DataTypes.STRING,
         allowNull: false,

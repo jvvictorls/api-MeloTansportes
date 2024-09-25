@@ -2,7 +2,10 @@
 
 interface INewExtraRoute {
   userId: number;
+  origin: string;
+  destination: string;
   date: Date
+  time: string;
   costCenter: string;
   driver: string;
   client: string;
