@@ -5,8 +5,10 @@ export default interface ICollaborators {
   phone: string
   routeId: number
   firm: 'Eurochem' | 'Cibra'
-  department: 'ADM' | 'PRODUÇÃO' | 'HSE' | 'MANUTENÇÃO' | 'QUALIDADE' | 'PCP' | 'RH' | 'LOGÍSTICA' | 'CORPORATIVO',
-  type: 'SUPERVISOR' | 'COORDENADOR' | 'COLABORADOR' | 'GERENTE' | 'DIRETOR' | 'ESTAGIÁRIO' | 'APRENDIZ' | 'TERCEIRIZADO' | 'OUTRO'
+  department: 'ADM' | 'PRODUÇÃO' | 'HSE' | 'MANUTENÇÃO' |
+  'QUALIDADE' | 'PCP' | 'RH' | 'LOGÍSTICA' | 'CORPORATIVO',
+  type: 'SUPERVISOR' | 'COORDENADOR' | 'COLABORADOR' | 'GERENTE' |
+  'DIRETOR' | 'ESTAGIÁRIO' | 'APRENDIZ' | 'TERCEIRIZADO' | 'OUTRO'
   createdAt: Date
   updatedAt: Date
 }

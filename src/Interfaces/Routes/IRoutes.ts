@@ -7,5 +7,4 @@ export interface IRoutes {
   currentCollaborators: number,
   createdAt: Date,
   updatedAt: Date
-
 }

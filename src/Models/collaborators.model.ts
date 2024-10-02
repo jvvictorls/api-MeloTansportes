@@ -1,6 +1,5 @@
-import ICollaboratorsModel from "../Interfaces/collaborators/ICollaboratorsModel";
-import ICollaborators from "../Interfaces/collaborators/ICollaborators";
-import SequelizeCollaborators from "../database/models/SequelizeCollaborators";
+import ICollaborators from '../Interfaces/collaborators/ICollaborators';
+import SequelizeCollaborators from '../database/models/SequelizeCollaborators';
 
 export default class CollaboratorsModel {
   private model = SequelizeCollaborators;

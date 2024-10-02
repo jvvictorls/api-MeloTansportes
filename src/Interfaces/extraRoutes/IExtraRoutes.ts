@@ -12,11 +12,11 @@ export default interface IExtraRoutes {
   updatedAt: Date,
   time: string,
   collaborators: {
-      id: number,
-      name: string,
-    }[],
+    id: number,
+    name: string,
+  }[],
   user: {
     id: number,
     name: string
   }
-}
+};

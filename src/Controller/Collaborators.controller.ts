@@ -1,6 +1,6 @@
-import CollaboratorsService from "../Services/Collaborators.service";
-import { Request, Response } from "express";
-import mapStatusHTTP from "../Utils/mapStatusHttp";
+import { Request, Response } from 'express';
+import CollaboratorsService from '../Services/Collaborators.service';
+import mapStatusHTTP from '../Utils/mapStatusHttp';
 
 export default class CollaboratorsController {
   private collaboratorsService = new CollaboratorsService();
@@ -18,8 +18,8 @@ export default class CollaboratorsController {
   }
 
   async getAllCollaborators(req: Request, res: Response) {
-    const {status, data} = await this.collaboratorsService.getAllCollaborators(); 
-    if(status !== 'SUCCESSFUL') {
+    const { status, data } = await this.collaboratorsService.getAllCollaborators();
+    if (status !== 'SUCCESSFUL') {
       return res.status(mapStatusHTTP(status)).json(data);
     }
     return res.status(200).json(data);

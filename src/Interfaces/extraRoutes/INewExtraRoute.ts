@@ -1,4 +1,4 @@
-//purpose: Interface for new extra routes
+// purpose: Interface for new extra routes
 
 interface INewExtraRoute {
   userId: number;
@@ -14,4 +14,4 @@ interface INewExtraRoute {
   user: { id: number; name: string; };
 }
 
-export default INewExtraRoute;  
+export default INewExtraRoute;

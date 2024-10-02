@@ -1,6 +1,6 @@
-import ExtraRoutesModel from "../Models/extraRoutes.model";
-import { ServiceResponse } from "../Utils/serviceResponse";
-import INewExtraRoute from '../Interfaces/extraRoutes/INewExtraRoute'
+import ExtraRoutesModel from '../Models/extraRoutes.model';
+import { ServiceResponse } from '../Utils/serviceResponse';
+import INewExtraRoute from '../Interfaces/extraRoutes/INewExtraRoute';
 
 export default class ExtraRoutesService {
   private extraRoutesModel = new ExtraRoutesModel();

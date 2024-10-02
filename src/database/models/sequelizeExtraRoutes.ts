@@ -4,13 +4,14 @@ import {
   CreationOptional,
   InferAttributes,
   InferCreationAttributes,
-  NonAttribute
+  NonAttribute,
 } from 'sequelize';
 import db from '.';
 import SequelizeUsers from './SequelizeUsers';
 import SequelizeCollaborators from './SequelizeCollaborators';
 
-class SequelizeExtraRoutes extends Model<InferAttributes<SequelizeExtraRoutes>, InferCreationAttributes<SequelizeExtraRoutes>> {
+class SequelizeExtraRoutes extends Model<InferAttributes<SequelizeExtraRoutes>,
+InferCreationAttributes<SequelizeExtraRoutes>> {
   declare id: CreationOptional<number>;
   declare origin: string;
   declare destination: string;
@@ -24,17 +25,18 @@ class SequelizeExtraRoutes extends Model<InferAttributes<SequelizeExtraRoutes>, 
   declare createdAt: Date;
   declare updatedAt: Date;
   declare collaborators: NonAttribute<
-    {
-      id: number;
-      name: string;
-      extra_routes_collaborators: {
-        createdAt: Date;
-        updatedAt: Date;
-        extra_route_id: number;
-        collaboratorId: number;
-      }
-    }[]
+  {
+    id: number;
+    name: string;
+    extra_routes_collaborators: {
+      createdAt: Date;
+      updatedAt: Date;
+      extra_route_id: number;
+      collaboratorId: number;
+    }
+  }[]
   >;
+
   declare user: NonAttribute<{
     id: number;
     name: string;
@@ -58,7 +60,7 @@ SequelizeExtraRoutes.init({
   },
   time: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   date: {
     type: DataTypes.DATE,
@@ -96,7 +98,7 @@ SequelizeExtraRoutes.init({
     type: DataTypes.DATE,
     allowNull: false,
     field: 'updated_at',
-  }
+  },
 }, {
   sequelize: db,
   tableName: 'extra_routes',
@@ -104,7 +106,7 @@ SequelizeExtraRoutes.init({
   timestamps: true,
 });
 
-SequelizeExtraRoutes.belongsTo(SequelizeUsers, {foreignKey: 'userId', as: 'user'});
+SequelizeExtraRoutes.belongsTo(SequelizeUsers, { foreignKey: 'userId', as: 'user' });
 
 SequelizeExtraRoutes.belongsToMany(SequelizeCollaborators, {
   through: 'extra_routes_collaborators',

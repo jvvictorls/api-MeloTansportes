@@ -1,10 +1,10 @@
-export type ServiceMessage =  {message: string};
+export type ServiceMessage = { message: string };
 
 type ServiceResponseErrorType = 'INVALID_DATA'
-| 'NOT_FOUND' 
-| 'CONFLICT' 
-| 'UNAUTHORIZED' 
-| 'INTERNAL_SERVER_ERROR' 
+| 'NOT_FOUND'
+| 'CONFLICT'
+| 'UNAUTHORIZED'
+| 'INTERNAL_SERVER_ERROR'
 | 'UNPROCESSABLE_ENTITY';
 
 export type ServiceResponseError = {

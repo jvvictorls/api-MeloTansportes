@@ -12,6 +12,11 @@
       "plugin:mocha/recommended",
       "airbnb-typescript/base"
     ],
+    "ignorePatterns": [
+      "dist/",
+      "node_modules/",
+      "src/database"
+    ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "ecmaVersion": 2019,
@@ -25,7 +30,7 @@
     ],
     "rules": {
       "no-underscore-dangle": "off",
-      "no-console": "off",
+      "no-console": "error",
       "camelcase": "warn",
       "arrow-parens": [
         2,
@@ -35,6 +40,7 @@
         2,
         "single"
       ],
+      "semi": "warn",
       "implicit-arrow-linebreak": "off",
       "consistent-return": "off",
       "@typescript-eslint/naming-convention": [
