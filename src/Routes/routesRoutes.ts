@@ -7,4 +7,6 @@ router.get(
   "/:id",
   (req: Request, res: Response) => routesController.getOneRoute(req, res)
 );
+
+router.get("/", (req: Request, res:Response) => routesController.getAllRoutes(req, res))
 export default router;

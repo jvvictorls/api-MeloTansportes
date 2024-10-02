@@ -19,4 +19,9 @@ export default class RoutesModel implements IRoutesModel {
     if (!findRoute) return null;
     return findRoute.dataValues;
   }
+
+  async getAllRoutes(): Promise<IRoutes[]> {
+    const allRoutes = await this.model.findAll();
+    return allRoutes.map((route) => route.dataValues);
+  }
 }

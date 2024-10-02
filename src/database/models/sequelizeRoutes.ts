@@ -12,19 +12,12 @@ import SequelizeCollaborators from './SequelizeCollaborators';
 
 class SequelizeRoutes extends Model<InferAttributes<SequelizeRoutes>, InferCreationAttributes<SequelizeRoutes>> {
   declare id: CreationOptional<number>;
-
   declare name: string;
-
   declare driver: string;
-
   declare client: string;
-
   declare maxCollaborators: number;
-
   declare currentCollaborators: number;
-
   declare createdAt: Date;
-
   declare updatedAt: Date;
 
 }

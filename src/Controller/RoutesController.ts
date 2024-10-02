@@ -13,4 +13,10 @@ export default class RoutesController {
     if (status !== "SUCCESSFUL") return res.status(mapStatusHTTP(status)).json(data);
     return res.status(200).json(data);
   }
+
+  async getAllRoutes(req: Request, res: Response) {
+    const { status, data } = await this.routesService.getAllRoutes();
+    if (status !== "SUCCESSFUL") return res.status(mapStatusHTTP(status)).json(data);
+    return res.status(200).json(data);
+  }
 }
