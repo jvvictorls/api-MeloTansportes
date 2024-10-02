@@ -19,4 +19,4 @@ export default interface IExtraRoutes {
     id: number,
     name: string
   }
-};
+}
