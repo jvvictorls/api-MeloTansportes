@@ -2,6 +2,7 @@ export type ServiceMessage = { message: string };
 
 type ServiceResponseErrorType = 'INVALID_DATA'
 | 'NOT_FOUND'
+| 'BAD_REQUEST'
 | 'CONFLICT'
 | 'UNAUTHORIZED'
 | 'INTERNAL_SERVER_ERROR'

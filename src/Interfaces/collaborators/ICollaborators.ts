@@ -4,11 +4,11 @@ export default interface ICollaborators {
   address: string
   phone: string
   routeId: number
-  firm: 'Eurochem' | 'Cibra'
+  firm: 'Eurochem'
   department: 'ADM' | 'PRODUÇÃO' | 'HSE' | 'MANUTENÇÃO' |
   'QUALIDADE' | 'PCP' | 'RH' | 'LOGÍSTICA' | 'CORPORATIVO',
-  type: 'SUPERVISOR' | 'COORDENADOR' | 'COLABORADOR' | 'GERENTE' |
-  'DIRETOR' | 'ESTAGIÁRIO' | 'APRENDIZ' | 'TERCEIRIZADO' | 'OUTRO'
+  type: 'SUPERVISOR' | 'COORDENADOR' | 'ASSISTENTE' | 'GERENTE' |
+  'DIRETOR' | 'ESTAGIÁRIO' | 'APRENDIZ' | 'TERCEIRIZADO' | 'ANALISTA' | 'OUTRO'
   createdAt: Date
   updatedAt: Date
 }

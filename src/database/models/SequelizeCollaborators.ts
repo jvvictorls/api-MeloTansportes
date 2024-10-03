@@ -14,9 +14,9 @@ InferCreationAttributes<SequelizeCollaborators>> {
   declare address: string;
   declare phone: string;
   declare routeId: number;
-  declare firm: 'Eurochem' | 'Cibra';
+  declare firm: 'Eurochem';
   declare department: 'ADM' | 'PRODUÇÃO' | 'HSE' | 'MANUTENÇÃO' | 'QUALIDADE' | 'PCP' | 'RH' | 'LOGÍSTICA' | 'CORPORATIVO';
-  declare type: 'SUPERVISOR' | 'COORDENADOR' | 'COLABORADOR' | 'GERENTE' | 'DIRETOR' | 'ESTAGIÁRIO' | 'APRENDIZ' | 'TERCEIRIZADO' | 'OUTRO';
+  declare type: 'SUPERVISOR' | 'COORDENADOR' | 'ASSISTENTE' | 'GERENTE' | 'DIRETOR' | 'ESTAGIÁRIO' | 'APRENDIZ' | 'TERCEIRIZADO' | 'ANALISTA' | 'OUTRO';
   declare createdAt: Date;
   declare updatedAt: Date;
 }

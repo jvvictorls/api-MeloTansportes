@@ -6,10 +6,15 @@ export default class CollaboratorsService {
   private collaboratorsModel = new CollaboratorsModel();
 
   async createCollaborator(collaborator: ICollaborators): Promise<ServiceResponse<ICollaborators>> {
-    const newCollaborator = await this.collaboratorsModel.createCollaborator(collaborator);
-    if (!newCollaborator) {
-      return { status: 'CONFLICT', data: { message: 'Collaborator already exists' } };
+    const checkIfCollaboratorExists = await this.collaboratorsModel
+      .findCollaboratorByName(collaborator.name);
+    if (checkIfCollaboratorExists) {
+      return {
+        status: 'CONFLICT',
+        data: { message: 'Parece já existir um colaborador com esse nome' },
+      };
     }
+    const newCollaborator = await this.collaboratorsModel.createCollaborator(collaborator);
     return { status: 'CREATED', data: newCollaborator };
   }
 
@@ -20,6 +25,19 @@ export default class CollaboratorsService {
       return { status: 'CONFLICT', data: { message: 'Collaborators already exists' } };
     }
     return { status: 'CREATED', data: newCollaborators };
+  }
+
+  async updateCollaboratorRoute(name: string, routeId: number):
+  Promise<ServiceResponse<ICollaborators | null>> {
+    if (!name || !routeId) {
+      return { status: 'BAD_REQUEST', data: { message: 'dados inválidos' } };
+    }
+    const updatedCollaborator = await this.collaboratorsModel
+      .updateCollaboratorRoute(name, routeId);
+    if (!updatedCollaborator) {
+      return { status: 'NOT_FOUND', data: { message: 'Collaborator not found' } };
+    }
+    return { status: 'SUCCESSFUL', data: updatedCollaborator };
   }
 
   async getAllCollaborators(): Promise<ServiceResponse<ICollaborators[]>> {

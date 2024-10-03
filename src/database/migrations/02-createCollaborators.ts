@@ -36,7 +36,7 @@ export default {
         allowNull: false,
       },
       type: {
-        type: DataTypes.ENUM('SUPERVISOR', 'COORDENADOR', 'COLABORADOR', 'GERENTE', 'DIRETOR', 'ESTAGIÁRIO', 'APRENDIZ', 'TERCEIRIZADO', 'OUTRO'),
+        type: DataTypes.ENUM('SUPERVISOR', 'COORDENADOR', 'ASSISTENTE', 'GERENTE', 'DIRETOR', 'ESTAGIÁRIO', 'APRENDIZ', 'TERCEIRIZADO', 'ANALISTA', 'OUTRO'),
         allowNull: false,
       },
       createdAt: {
