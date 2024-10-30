@@ -10,7 +10,4 @@ router.get('/', async (req: Request, res: Response) =>
 router.post('/', async (req: Request, res: Response) =>
   collaboratorsController.createCollaborator(req, res));
 
-router.put('/:id', async (req: Request, res: Response) =>
-  collaboratorsController.updateCollaboratorRoute(req, res));
-
 export default router;

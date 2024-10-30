@@ -26,13 +26,6 @@ export default class CollaboratorsModel {
     return collaborator.dataValues;
   }
 
-  async updateCollaboratorRoute(name: string, routeId: number): Promise<ICollaborators | null> {
-    const collaborator = await this.model.findOne({ where: { name } });
-    if (!collaborator) return null;
-    await collaborator.update({ routeId });
-    return collaborator.dataValues;
-  }
-
   async getAllCollaborators(): Promise<ICollaborators[]> {
     const collaborators = await this.model.findAll();
     return collaborators.map((collaborator) => collaborator.dataValues);

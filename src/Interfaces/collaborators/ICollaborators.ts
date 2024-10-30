@@ -1,14 +1,16 @@
 export default interface ICollaborators {
   id: number
   name: string
-  address: string
+  neighborhood: string,
+  city: string,
+  street: string,
+  number: string,
   phone: string
-  routeId: number
-  firm: 'Eurochem'
-  department: 'ADM' | 'PRODUÇÃO' | 'HSE' | 'MANUTENÇÃO' |
-  'QUALIDADE' | 'PCP' | 'RH' | 'LOGÍSTICA' | 'CORPORATIVO',
-  type: 'SUPERVISOR' | 'COORDENADOR' | 'ASSISTENTE' | 'GERENTE' |
-  'DIRETOR' | 'ESTAGIÁRIO' | 'APRENDIZ' | 'TERCEIRIZADO' | 'ANALISTA' | 'OUTRO'
+  arrivalRouteId: number
+  outboundRouteId: number
+  company: string
+  department: string,
+  position: string,
   createdAt: Date
   updatedAt: Date
 }

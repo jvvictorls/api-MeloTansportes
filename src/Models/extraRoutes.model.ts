@@ -8,7 +8,6 @@ export default class ExtraRoutesModel {
   private model = SequelizeExtraRoutes;
 
   async createExtraRoute(data: INewExtraRoute): Promise<IExtraRoutes> {
-    console.log(data);
     try {
       const extraRoute = await this.model.create(
         {

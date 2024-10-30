@@ -20,17 +20,6 @@ export default class CollaboratorsController {
     return res.status(response.status === 'CREATED' ? 201 : 409).json(response);
   }
 
-  async updateCollaboratorRoute(req: Request, res: Response) {
-    const { id } = req.params;
-    const { name } = req.body;
-    const { status, data } = await this.collaboratorsService
-      .updateCollaboratorRoute(name, Number(id));
-    if (status !== 'SUCCESSFUL') {
-      return res.status(mapStatusHTTP(status)).json(data);
-    }
-    return res.status(200).json(data);
-  }
-
   async getAllCollaborators(req: Request, res: Response) {
     const { status, data } = await this.collaboratorsService.getAllCollaborators();
     if (status !== 'SUCCESSFUL') {

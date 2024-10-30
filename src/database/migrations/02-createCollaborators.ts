@@ -14,7 +14,19 @@ export default {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      address: {
+      neighborhood: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      street: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      number: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -22,21 +34,26 @@ export default {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      routeId: {
+      arrivalRouteId: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-        field: 'route_id',
+        allowNull: false,
+        field: 'arrival_route_id',
       },
-      firm: {
-        type: DataTypes.ENUM('Eurochem', 'Cibra'),
+      outboundRouteId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: 'outbound_route_id',
+      },
+      company: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       department: {
-        type: DataTypes.ENUM('ADM', 'PRODUÇÃO', 'HSE', 'MANUTENÇÃO', 'QUALIDADE', 'PCP', 'RH', 'LOGÍSTICA', 'CORPORATIVO'),
+        type: DataTypes.STRING,
         allowNull: false,
       },
-      type: {
-        type: DataTypes.ENUM('SUPERVISOR', 'COORDENADOR', 'ASSISTENTE', 'GERENTE', 'DIRETOR', 'ESTAGIÁRIO', 'APRENDIZ', 'TERCEIRIZADO', 'ANALISTA', 'OUTRO'),
+      position: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       createdAt: {

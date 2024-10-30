@@ -11,12 +11,16 @@ class SequelizeCollaborators extends Model<InferAttributes<SequelizeCollaborator
 InferCreationAttributes<SequelizeCollaborators>> {
   declare id: CreationOptional<number>;
   declare name: string;
-  declare address: string;
+  declare neighborhood: string;
+  declare city: string;
+  declare street: string;
+  declare number: string;
   declare phone: string;
-  declare routeId: number;
-  declare firm: 'Eurochem';
-  declare department: 'ADM' | 'PRODUÇÃO' | 'HSE' | 'MANUTENÇÃO' | 'QUALIDADE' | 'PCP' | 'RH' | 'LOGÍSTICA' | 'CORPORATIVO';
-  declare type: 'SUPERVISOR' | 'COORDENADOR' | 'ASSISTENTE' | 'GERENTE' | 'DIRETOR' | 'ESTAGIÁRIO' | 'APRENDIZ' | 'TERCEIRIZADO' | 'ANALISTA' | 'OUTRO';
+  declare arrivalRouteId: number;
+  declare outboundRouteId: number;
+  declare company: string;
+  declare department: string;
+  declare position: string;
   declare createdAt: Date;
   declare updatedAt: Date;
 }
@@ -32,33 +36,46 @@ SequelizeCollaborators.init({
     type: DataTypes.STRING,
     allowNull: false,
   },
-  address: {
+  neighborhood: {
     type: DataTypes.STRING,
     allowNull: false,
+  },
+  city: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  street: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  number: {
+    type: DataTypes.STRING,
+    allowNull: false
   },
   phone: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  routeId: {
+  arrivalRouteId: {
     type: DataTypes.INTEGER,
     allowNull: true,
-    references: {
-      model: 'routes',
-      key: 'id',
-    },
-    field: 'route_id',
+    field: 'arrival_route_id',
   },
-  firm: {
-    type: DataTypes.ENUM('Eurochem', 'Cibra'),
+  outboundRouteId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    field: 'outbound_route_id',
+  },
+  company: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
   department: {
-    type: DataTypes.ENUM('ADM', 'PRODUÇÃO', 'HSE', 'MANUTENÇÃO', 'QUALIDADE', 'PCP', 'RH', 'LOGÍSTICA', 'CORPORATIVO'),
+    type: DataTypes.STRING,
     allowNull: false,
   },
-  type: {
-    type: DataTypes.ENUM('SUPERVISOR', 'COORDENADOR', 'COLABORADOR', 'GERENTE', 'DIRETOR', 'ESTAGIÁRIO', 'APRENDIZ', 'TERCEIRIZADO', 'OUTRO'),
+  position: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
   createdAt: {

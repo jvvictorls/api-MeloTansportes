@@ -65,6 +65,4 @@ SequelizeRoutes.init({
   timestamps: false,
 });
 
-SequelizeRoutes.hasMany(SequelizeCollaborators, { foreignKey: 'routeId', as: 'route' });
-
 export default SequelizeRoutes;

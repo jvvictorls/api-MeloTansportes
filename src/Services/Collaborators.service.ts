@@ -27,19 +27,6 @@ export default class CollaboratorsService {
     return { status: 'CREATED', data: newCollaborators };
   }
 
-  async updateCollaboratorRoute(name: string, routeId: number):
-  Promise<ServiceResponse<ICollaborators | null>> {
-    if (!name || !routeId) {
-      return { status: 'BAD_REQUEST', data: { message: 'dados inválidos' } };
-    }
-    const updatedCollaborator = await this.collaboratorsModel
-      .updateCollaboratorRoute(name, routeId);
-    if (!updatedCollaborator) {
-      return { status: 'NOT_FOUND', data: { message: 'Collaborator not found' } };
-    }
-    return { status: 'SUCCESSFUL', data: updatedCollaborator };
-  }
-
   async getAllCollaborators(): Promise<ServiceResponse<ICollaborators[]>> {
     const collaborators = await this.collaboratorsModel.getAllCollaborators();
     if (!collaborators) {
