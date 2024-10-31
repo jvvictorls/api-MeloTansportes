@@ -12,8 +12,8 @@ export default class RoutesModel implements IRoutesModel {
       { include:
         {
           model: SequelizeCollaborators,
-          as: 'route',
-          where: { routeId: id },
+          as: 'collaborators',
+          where: { arrivalRouteId: id },
         },
       },
     );
@@ -22,7 +22,15 @@ export default class RoutesModel implements IRoutesModel {
   }
 
   async getAllRoutes(): Promise<IRoutes[]> {
-    const allRoutes = await this.model.findAll();
+    const allRoutes = await this.model.findAll(
+      {
+        include:
+        {
+          model: SequelizeCollaborators,
+          as: 'collaborators',
+        },
+      },
+    );
     return allRoutes.map((route) => route.dataValues);
   }
 }

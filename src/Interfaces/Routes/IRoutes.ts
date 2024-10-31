@@ -4,7 +4,6 @@ export interface IRoutes {
   driver: string,
   client: string,
   maxCollaborators: number,
-  currentCollaborators: number,
   createdAt: Date,
   updatedAt: Date
 }

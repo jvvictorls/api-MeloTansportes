@@ -16,7 +16,6 @@ InferCreationAttributes<SequelizeRoutes>> {
   declare driver: string;
   declare client: string;
   declare maxCollaborators: number;
-  declare currentCollaborators: number;
   declare createdAt: Date;
   declare updatedAt: Date;
 }
@@ -44,10 +43,6 @@ SequelizeRoutes.init({
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  currentCollaborators: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
   createdAt: {
     type: DataTypes.DATE,
     allowNull: false,
@@ -60,9 +55,11 @@ SequelizeRoutes.init({
   },
 }, {
   sequelize: db,
-  modelName: 'routes',
+  modelName: 'arrival_routes',
   underscored: true,
   timestamps: false,
 });
+
+SequelizeRoutes.hasMany(SequelizeCollaborators, {foreignKey: 'arrival_route_id', as: 'collaborators'});
 
 export default SequelizeRoutes;
