@@ -1,5 +1,5 @@
 import RoutesModel from '../Models/Routes.model';
-import { ServiceResponse } from '../Interfaces/Users/ServiceResponse';
+import { ServiceResponse } from '../Utils/serviceResponse';
 import { IRoutes } from '../Interfaces/Routes/IRoutes';
 
 export default class RoutesService {

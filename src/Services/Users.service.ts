@@ -1,5 +1,5 @@
 import UsersModel from '../Models/Users.model';
-import { ServiceMessage, ServiceResponse } from '../Interfaces/Users/ServiceResponse';
+import { ServiceResponse } from '../Utils/serviceResponse';
 import IUsers from '../Interfaces/Users/IUsers';
 import IUsersModel from '../Interfaces/Users/IUsersModel';
 import ILogin from '../Interfaces/Users/ILogin';
@@ -110,7 +110,7 @@ export default class UsersService {
     };
   }
 
-  async login(user: ILogin): Promise<ServiceResponse<ServiceMessage | IUsers>> {
+  async login(user: ILogin): Promise<ServiceResponse<IUsers>> {
     const userExists = await this.usersModel.findByEmail(user.email);
     if (!userExists) return { status: 'INVALID_DATA', data: { message: 'User dont exists' } };
     if (userExists.password !== user.password) {
