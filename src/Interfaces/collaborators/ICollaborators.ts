@@ -5,9 +5,7 @@ export default interface ICollaborators {
   city: string,
   street: string,
   number: string,
-  phone: string
-  arrivalRouteId: number
-  outboundRouteId: number
+  phone: string,
   company: string
   department: string,
   position: string,

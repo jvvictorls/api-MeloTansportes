@@ -60,6 +60,16 @@ SequelizeRoutes.init({
   timestamps: false,
 });
 
-SequelizeRoutes.hasMany(SequelizeCollaborators, {foreignKey: 'arrival_route_id', as: 'collaborators'});
+SequelizeRoutes.belongsToMany(SequelizeCollaborators, {
+  through: 'collaborators_routes',
+  foreignKey: 'route_id',
+});
+SequelizeCollaborators.belongsToMany(SequelizeRoutes, {
+  through: 'collaborators_routes',
+  foreignKey: 'collaborator_id',
+});
+
 
 export default SequelizeRoutes;
+
+

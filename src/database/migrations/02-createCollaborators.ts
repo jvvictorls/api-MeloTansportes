@@ -34,16 +34,6 @@ export default {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      arrivalRouteId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        field: 'arrival_route_id',
-      },
-      outboundRouteId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        field: 'outbound_route_id',
-      },
       company: {
         type: DataTypes.STRING,
         allowNull: false,
