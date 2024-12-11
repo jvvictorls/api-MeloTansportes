@@ -4,7 +4,6 @@ import routesRoutes from './routesRoutes';
 import extraRoutesRoutes from './ExtraRoutes';
 import collaboratorsRoutes from './CollaboratorsRoutes';
 
-
 const router = Router();
 
 router.use('/users', UserRouter);

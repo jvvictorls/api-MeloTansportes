@@ -16,6 +16,8 @@ InferCreationAttributes<SequelizeRoutes>> {
   declare driver: string;
   declare client: string;
   declare maxCollaborators: number;
+  declare shift: string;
+  declare period: string;
   declare createdAt: Date;
   declare updatedAt: Date;
 }
@@ -41,6 +43,14 @@ SequelizeRoutes.init({
   },
   maxCollaborators: {
     type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  shift: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  period: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
   createdAt: {

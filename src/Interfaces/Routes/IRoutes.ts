@@ -4,6 +4,8 @@ export interface IRoutes {
   driver: string,
   client: string,
   maxCollaborators: number,
+  shift: string,
+  period: string,
   createdAt: Date,
   updatedAt: Date
 }

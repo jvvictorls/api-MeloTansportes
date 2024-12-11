@@ -27,6 +27,14 @@ export default {
       allowNull: false,
       field: 'max_collaborators'
     },
+    shift: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    period: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     createdAt: {
       type: DataTypes.DATE,
       allowNull: false,
