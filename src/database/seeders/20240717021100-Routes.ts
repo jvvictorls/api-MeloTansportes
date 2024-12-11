@@ -17,7 +17,7 @@ export default {
         driver: 'João Moreno',
         client: 'Eurochem',
         shift: 'A',
-        Perído: 'Manhã',
+        period: 'Manhã',
         max_collaborators: 15,
         created_at: new Date(),
         updated_at: new Date(),
