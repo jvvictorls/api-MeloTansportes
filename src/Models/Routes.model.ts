@@ -13,6 +13,9 @@ export default class RoutesModel implements IRoutesModel {
           model: SequelizeCollaborators,
           as: 'collaborators',
           attributes: ['name'],
+          through: {
+            attributes: [],
+          },
         },
       ],
     });
