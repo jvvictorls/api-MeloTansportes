@@ -55,17 +55,17 @@ SequelizeRoutes.init({
   },
 }, {
   sequelize: db,
-  modelName: 'arrival_routes',
+  modelName: 'routes',
   underscored: true,
   timestamps: false,
 });
 
 SequelizeRoutes.belongsToMany(SequelizeCollaborators, {
-  through: 'collaborators_routes',
+  through: 'routes_collaborators',
   foreignKey: 'route_id',
 });
 SequelizeCollaborators.belongsToMany(SequelizeRoutes, {
-  through: 'collaborators_routes',
+  through: 'routes_collaborators',
   foreignKey: 'collaborator_id',
 });
 

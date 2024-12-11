@@ -3,7 +3,7 @@ import { IRoutes } from '../../Interfaces/Routes/IRoutes';
 
 export default {
   up (queryInterface: QueryInterface) {
-    return queryInterface.createTable<Model<IRoutes>>('arrival_routes', {
+    return queryInterface.createTable<Model<IRoutes>>('routes', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -41,6 +41,6 @@ export default {
   },
 
   down(queryInterface: QueryInterface) {
-    return queryInterface.dropTable('arrival_routes')
+    return queryInterface.dropTable('routes')
   }
 }

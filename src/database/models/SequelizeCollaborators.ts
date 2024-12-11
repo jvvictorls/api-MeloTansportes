@@ -16,8 +16,6 @@ InferCreationAttributes<SequelizeCollaborators>> {
   declare street: string;
   declare number: string;
   declare phone: string;
-  declare arrivalRouteId: number;
-  declare outboundRouteId: number;
   declare company: string;
   declare department: string;
   declare position: string;
@@ -55,16 +53,6 @@ SequelizeCollaborators.init({
   phone: {
     type: DataTypes.STRING,
     allowNull: false
-  },
-  arrivalRouteId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    field: 'arrival_route_id',
-  },
-  outboundRouteId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-    field: 'outbound_route_id',
   },
   company: {
     type: DataTypes.STRING,

@@ -1,7 +1,7 @@
 import { QueryInterface } from "sequelize";
 export default {
   up: async (queryInterface: QueryInterface) => {
-    await queryInterface.bulkInsert('arrival_routes', [
+    await queryInterface.bulkInsert('routes', [
       {
         name: 'Rota A1',
         driver: 'Wanderson Araújo',
@@ -30,6 +30,6 @@ export default {
   },
 
   down: async (queryInterface: QueryInterface) => {
-    await queryInterface.bulkDelete('arrival_routes', {});
+    await queryInterface.bulkDelete('routes', {});
   }
 }
