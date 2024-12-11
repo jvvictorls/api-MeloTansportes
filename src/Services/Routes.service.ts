@@ -7,20 +7,6 @@ export default class RoutesService {
     private routesModel: RoutesModel = new RoutesModel(),
   ) {}
 
-  async getOneRoute(id: number): Promise<ServiceResponse<IRoutes>> {
-    const route = await this.routesModel.findOneRoute(id);
-    if (!route) {
-      return {
-        status: 'NOT_FOUND',
-        data: { message: 'No route found' },
-      };
-    }
-    return {
-      status: 'SUCCESSFUL',
-      data: route,
-    };
-  }
-
   async getAllRoutes(): Promise<ServiceResponse<IRoutes[]>> {
     const routes = await this.routesModel.getAllRoutes();
     if (routes.length < 1) {
@@ -32,6 +18,20 @@ export default class RoutesService {
     return {
       status: 'SUCCESSFUL',
       data: routes,
+    };
+  }
+
+  async getOneRoute(id: number): Promise<ServiceResponse<IRoutes>> {
+    const route = await this.routesModel.getRouteById(id);
+    if (!route) {
+      return {
+        status: 'NOT_FOUND',
+        data: { message: 'No route found' },
+      };
+    }
+    return {
+      status: 'SUCCESSFUL',
+      data: route,
     };
   }
 }

@@ -6,31 +6,32 @@ import SequelizeCollaborators from '../database/models/SequelizeCollaborators';
 export default class RoutesModel implements IRoutesModel {
   private model = SequelizeRoutes;
 
-  async findOneRoute(id: number): Promise<IRoutes | null> {
-    const findRoute = await this.model.findByPk(
-      id,
-      { include:
+  async getAllRoutes(): Promise<IRoutes[]> {
+    const routes = await this.model.findAll({
+      include: [
         {
           model: SequelizeCollaborators,
           as: 'collaborators',
-          where: { arrivalRouteId: id },
+          attributes: ['name'],
         },
-      },
-    );
-    if (!findRoute) return null;
-    return findRoute.dataValues;
+      ],
+    });
+    return routes;
   }
 
-  async getAllRoutes(): Promise<IRoutes[]> {
-    const allRoutes = await this.model.findAll(
-      {
-        include:
+  async getRouteById(id: number): Promise<IRoutes | null> {
+    const route = await this.model.findByPk(id, {
+      include: [
         {
           model: SequelizeCollaborators,
           as: 'collaborators',
+          attributes: ['name'],
+          through: {
+            attributes: [],
+          },
         },
-      },
-    );
-    return allRoutes.map((route) => route.dataValues);
+      ],
+    });
+    return route;
   }
 }
