@@ -5,6 +5,7 @@ export default interface ICollaborators {
   city: string,
   street: string,
   number: string,
+  boardingTime: string,
   phone: string,
   company: string
   department: string,

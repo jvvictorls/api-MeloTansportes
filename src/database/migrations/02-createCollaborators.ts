@@ -30,6 +30,11 @@ export default {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      boardingTime: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'boarding_time',
+      },
       phone: {
         type: DataTypes.STRING,
         allowNull: false,

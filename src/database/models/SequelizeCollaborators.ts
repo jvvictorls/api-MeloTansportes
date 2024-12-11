@@ -16,6 +16,7 @@ InferCreationAttributes<SequelizeCollaborators>> {
   declare street: string;
   declare number: string;
   declare phone: string;
+  declare boardingTime: string;
   declare company: string;
   declare department: string;
   declare position: string;
@@ -53,6 +54,11 @@ SequelizeCollaborators.init({
   phone: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  boardingTime: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    field: 'boarding_time',
   },
   company: {
     type: DataTypes.STRING,
