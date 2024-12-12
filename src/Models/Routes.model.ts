@@ -12,7 +12,7 @@ export default class RoutesModel implements IRoutesModel {
         {
           model: SequelizeCollaborators,
           as: 'collaborators',
-          attributes: ['name'],
+          attributes: ['name', 'neighborhood', 'phone', 'boardingTime', 'department'],
           through: {
             attributes: [],
           },
@@ -28,7 +28,7 @@ export default class RoutesModel implements IRoutesModel {
         {
           model: SequelizeCollaborators,
           as: 'collaborators',
-          attributes: ['name'],
+          attributes: ['name', 'neighborhood', 'phone', 'boardingTime', 'department'],
           through: {
             attributes: [],
           },
