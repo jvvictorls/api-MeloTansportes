@@ -5,6 +5,7 @@ import SequelizeCollaborators from '../database/models/SequelizeCollaborators';
 
 export default class RoutesModel implements IRoutesModel {
   private model = SequelizeRoutes;
+  private collaboratorModel = SequelizeCollaborators;
 
   async getAllRoutes(): Promise<IRoutes[]> {
     const routes = await this.model.findAll({
@@ -36,5 +37,43 @@ export default class RoutesModel implements IRoutesModel {
       ],
     });
     return route;
+  }
+
+  async removeCollaboratorFromRoute(
+    routeId: number,
+    collaboratorId: number,
+  ) {
+    const route = await this.model.findByPk(routeId);
+    if (!route) return null;
+    route.removeCollaborator(collaboratorId);
+    const updatedRoute = await this.model.findByPk(routeId, {
+      include: [{
+        model: SequelizeCollaborators,
+        as: 'collaborators',
+        attributes: ['name'],
+        through: { attributes: [] },
+      }],
+    });
+    return updatedRoute;
+  }
+
+  async addCollaboratorToRoute(
+    routeId: number,
+    collaboratorId: number,
+  ): Promise<IRoutes | null> {
+    const collaborator = await this.collaboratorModel.findByPk(collaboratorId);
+    if (!collaborator) return null;
+    const route = await this.model.findByPk(routeId);
+    if (!route) return null;
+    route.addCollaborator(collaboratorId);
+    const updatedRoute = await this.model.findByPk(routeId, {
+      include: [{
+        model: SequelizeCollaborators,
+        as: 'collaborators',
+        attributes: ['name'],
+        through: { attributes: [] },
+      }],
+    });
+    return updatedRoute;
   }
 }

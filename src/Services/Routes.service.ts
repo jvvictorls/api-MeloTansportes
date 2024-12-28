@@ -2,6 +2,8 @@ import RoutesModel from '../Models/Routes.model';
 import { ServiceResponse } from '../Utils/serviceResponse';
 import { IRoutes } from '../Interfaces/Routes/IRoutes';
 
+const NOT_FOUND = 'No route found';
+
 export default class RoutesService {
   constructor(
     private routesModel: RoutesModel = new RoutesModel(),
@@ -12,7 +14,7 @@ export default class RoutesService {
     if (routes.length < 1) {
       return {
         status: 'NOT_FOUND',
-        data: { message: 'No routes found' },
+        data: { message: NOT_FOUND },
       };
     }
     return {
@@ -27,6 +29,46 @@ export default class RoutesService {
       return {
         status: 'NOT_FOUND',
         data: { message: 'No route found' },
+      };
+    }
+    return {
+      status: 'SUCCESSFUL',
+      data: route,
+    };
+  }
+
+  async removeCollaboratorFromRoute(
+    routeId: number,
+    collaboratorId: number,
+  ): Promise<ServiceResponse<IRoutes>> {
+    const route = await this.routesModel.removeCollaboratorFromRoute(
+      routeId,
+      collaboratorId,
+    );
+    if (!route) {
+      return {
+        status: 'NOT_FOUND',
+        data: { message: NOT_FOUND },
+      };
+    }
+    return {
+      status: 'SUCCESSFUL',
+      data: route,
+    };
+  }
+
+  async addCollaboratorToRoute(
+    routeId: number,
+    collaboratorId: number,
+  ): Promise<ServiceResponse<IRoutes>> {
+    const route = await this.routesModel.addCollaboratorToRoute(
+      routeId,
+      collaboratorId,
+    );
+    if (!route) {
+      return {
+        status: 'NOT_FOUND',
+        data: { message: NOT_FOUND },
       };
     }
     return {

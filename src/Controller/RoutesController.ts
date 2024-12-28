@@ -19,4 +19,24 @@ export default class RoutesController {
     if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
     return res.status(200).json(data);
   }
+
+  async removeCollaboratorFromRoute(req: Request, res: Response) {
+    const { routeId, collaboratorId } = req.params;
+    const { status, data } = await this.routesService.removeCollaboratorFromRoute(
+      Number(routeId),
+      Number(collaboratorId),
+    );
+    if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
+    return res.status(200).json(data);
+  }
+
+  async addCollaboratorToRoute(req: Request, res: Response) {
+    const { routeId, collaboratorId } = req.params;
+    const { status, data } = await this.routesService.addCollaboratorToRoute(
+      Number(routeId),
+      Number(collaboratorId),
+    );
+    if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
+    return res.status(200).json(data);
+  }
 }

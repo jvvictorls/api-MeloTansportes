@@ -9,4 +9,14 @@ router.get(
 );
 
 router.get('/', (req: Request, res:Response) => routesController.getAllRoutes(req, res));
+
+router.patch(
+  '/:routeId/remove/:collaboratorId',
+  (req: Request, res: Response) => routesController.removeCollaboratorFromRoute(req, res),
+);
+
+router.patch(
+  '/:routeId/add/:collaboratorId',
+  (req: Request, res: Response) => routesController.addCollaboratorToRoute(req, res),
+);
 export default router;

@@ -20,6 +20,10 @@ InferCreationAttributes<SequelizeRoutes>> {
   declare period: string;
   declare createdAt: Date;
   declare updatedAt: Date;
+
+  //Declaração de metodos autogerados pelo sequelize
+  declare removeCollaborator: (collaboratorId: number) => void;
+  declare addCollaborator: (collaboratorId: number) => void;
 }
 
 SequelizeRoutes.init({
@@ -73,10 +77,12 @@ SequelizeRoutes.init({
 SequelizeRoutes.belongsToMany(SequelizeCollaborators, {
   through: 'routes_collaborators',
   foreignKey: 'route_id',
+  timestamps: false,
 });
 SequelizeCollaborators.belongsToMany(SequelizeRoutes, {
   through: 'routes_collaborators',
   foreignKey: 'collaborator_id',
+  timestamps: false,
 });
 
 
