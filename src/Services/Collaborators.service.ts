@@ -46,6 +46,9 @@ export default class CollaboratorsService {
   async updateCollaboratorById(collaborator: ICollaborators):
   Promise<ServiceResponse<ICollaborators>> {
     const updatedCollaborator = await this.collaboratorsModel.updateCollaboratorById(collaborator);
+    if (!updatedCollaborator) {
+      return { status: 'NOT_FOUND', data: { message: 'Collaborator not found' } };
+    }
     return { status: 'SUCCESSFUL', data: updatedCollaborator };
   }
 }

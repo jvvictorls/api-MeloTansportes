@@ -31,11 +31,12 @@ export default class CollaboratorsModel {
     return collaborators.map((collaborator) => collaborator.dataValues);
   }
 
-  async updateCollaboratorById(collaborator: ICollaborators): Promise<ICollaborators> {
+  async updateCollaboratorById(collaborator: ICollaborators): Promise<ICollaborators | null> {
     const updateCollaborator = await this.model.update(collaborator, {
       where: { id: collaborator.id },
-      returning: true,
     });
-    return updateCollaborator[1][0].dataValues;
+    if (updateCollaborator[0] === 0) return null;
+    const collaboratorUpdated = await this.findCollaboratorById(collaborator.id);
+    return collaboratorUpdated;
   }
 }
