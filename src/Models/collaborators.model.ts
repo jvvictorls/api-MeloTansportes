@@ -30,4 +30,12 @@ export default class CollaboratorsModel {
     const collaborators = await this.model.findAll();
     return collaborators.map((collaborator) => collaborator.dataValues);
   }
+
+  async updateCollaboratorById(collaborator: ICollaborators): Promise<ICollaborators> {
+    const updateCollaborator = await this.model.update(collaborator, {
+      where: { id: collaborator.id },
+      returning: true,
+    });
+    return updateCollaborator[1][0].dataValues;
+  }
 }

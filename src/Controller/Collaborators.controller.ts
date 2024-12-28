@@ -27,4 +27,14 @@ export default class CollaboratorsController {
     }
     return res.status(200).json(data);
   }
+
+  async updateCollaboratorById(req: Request, res: Response) {
+    const collaborator = req.body;
+    await this.collaboratorsService.findCollaboratorById(collaborator.id);
+    const { status, data } = await this.collaboratorsService.updateCollaboratorById(collaborator);
+    if (status !== 'SUCCESSFUL') {
+      return res.status(mapStatusHTTP(status)).json(data);
+    }
+    return res.status(200).json(data);
+  }
 }

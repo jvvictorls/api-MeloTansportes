@@ -34,4 +34,18 @@ export default class CollaboratorsService {
     }
     return { status: 'SUCCESSFUL', data: collaborators };
   }
+
+  async findCollaboratorById(id: number): Promise<ServiceResponse<ICollaborators>> {
+    const collaborator = await this.collaboratorsModel.findCollaboratorById(id);
+    if (!collaborator) {
+      return { status: 'NOT_FOUND', data: { message: 'Collaborator not found' } };
+    }
+    return { status: 'SUCCESSFUL', data: collaborator };
+  }
+
+  async updateCollaboratorById(collaborator: ICollaborators):
+  Promise<ServiceResponse<ICollaborators>> {
+    const updatedCollaborator = await this.collaboratorsModel.updateCollaboratorById(collaborator);
+    return { status: 'SUCCESSFUL', data: updatedCollaborator };
+  }
 }
