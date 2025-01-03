@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import RoutesController from '../Controller/RoutesController';
+import Validations from '../middlewares/validateLogin';
 
 const router = Router();
 const routesController = new RoutesController();
@@ -8,7 +9,11 @@ router.get(
   (req: Request, res: Response) => routesController.getOneRoute(req, res),
 );
 
-router.get('/', (req: Request, res:Response) => routesController.getAllRoutes(req, res));
+router.get(
+  '/',
+  Validations.validateToken,
+  (req: Request, res:Response) => routesController.getAllRoutes(req, res),
+);
 
 router.patch(
   '/:routeId/remove/:collaboratorId',

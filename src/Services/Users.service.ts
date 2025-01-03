@@ -110,14 +110,15 @@ export default class UsersService {
     };
   }
 
-  async login(user: ILogin): Promise<ServiceResponse<IUsers>> {
+  async login(user: ILogin): Promise<ServiceResponse<string>> {
     const userExists = await this.usersModel.findByEmail(user.email);
     if (!userExists) return { status: 'INVALID_DATA', data: { message: 'User dont exists' } };
     if (userExists.password !== user.password) {
       return { status: 'INVALID_DATA',
         data: { message: 'incorrect password' } };
     }
-
-    return { status: 'SUCCESSFUL', data: userExists };
+    const { email, type } = userExists as IUsers;
+    const token = this.jwt.sign({ email, type });
+    return { status: 'SUCCESSFUL', data: token };
   }
 }
