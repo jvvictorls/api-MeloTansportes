@@ -21,10 +21,14 @@ export default class UsersController {
   }
 
   async findByEmail(req: Request, res: Response) {
-    const { email } = req.body;
-    const { status, data } = await this.usersService.findByEmail(email);
-    if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
-    return res.status(200).json(data);
+    try {
+      const { email } = req.params;
+      const { status, data } = await this.usersService.findByEmail(email);
+      if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
+      return res.status(200).json(data);
+    } catch (e: any) {
+      return e.message;
+    }
   }
 
   async create(req: Request, res: Response) {

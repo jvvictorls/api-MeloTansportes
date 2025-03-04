@@ -14,6 +14,11 @@ router.get(
   (req: Request, res: Response) => usersController.findById(req, res),
 );
 
+router.get(
+  '/email/:email',
+  (req: Request, res: Response) => usersController.findByEmail(req, res),
+);
+
 router.post(
   '/signup',
   (req: Request, res: Response) => usersController.create(req, res),
