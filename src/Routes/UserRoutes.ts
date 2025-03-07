@@ -14,8 +14,8 @@ router.get(
   (req: Request, res: Response) => usersController.findById(req, res),
 );
 
-router.get(
-  '/email/:email',
+router.post(
+  '/email',
   (req: Request, res: Response) => usersController.findByEmail(req, res),
 );
 
