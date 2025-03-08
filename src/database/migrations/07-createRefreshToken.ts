@@ -1,10 +1,5 @@
-import {
-  DataTypes,
-  QueryInterface,
-  Model
-} from 'sequelize'
+import { DataTypes, QueryInterface, Model } from 'sequelize'
 import IRefreshToken from '../../Interfaces/refreshToken/IRefreshToken'
-import UsersModel from '../models/SequelizeUsers'
 
 export default {
   up: async (queryInterface: QueryInterface) => {
@@ -12,13 +7,14 @@ export default {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        allowNull: false
       },
       userId: {
         type: DataTypes.INTEGER,
         allowNull:false,
         references: {
-          model: UsersModel,
+          model: 'users',
           key: 'id',
         },
         onDelete: 'CASCADE'
