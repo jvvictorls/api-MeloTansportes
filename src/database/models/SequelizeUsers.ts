@@ -6,6 +6,7 @@ import {
   CreationOptional,
 } from 'sequelize';
 import db from '.';
+import SequelizeRefreshToken from './SequelizeRefreshToken';
 
 class SequelizeUsers extends Model<InferAttributes<SequelizeUsers>,
 InferCreationAttributes<SequelizeUsers>> {
@@ -46,5 +47,8 @@ SequelizeUsers.init({
   modelName: 'users',
   timestamps: false,
 });
+
+SequelizeUsers.hasMany(SequelizeRefreshToken, {foreignKey: 'userId' as 'refreshTokens'});
+SequelizeRefreshToken.belongsTo(SequelizeUsers, {foreignKey: 'userId' as 'user'})
 
 export default SequelizeUsers;
