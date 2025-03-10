@@ -2,10 +2,13 @@ import IRefreshToken from '../Interfaces/refreshToken/IRefreshToken';
 import RefreshTokenModel from '../Models/refreshToken.model';
 import JWT from '../Utils/JWT';
 import { ServiceResponse } from '../Utils/serviceResponse';
+import ILogin from '../Interfaces/Users/ILogin';
+import UsersModel from '../Models/Users.model';
 
 class RefreshTokenService {
   private refreshTokenModel = new RefreshTokenModel();
   private jwt = JWT;
+  private usersModel = new UsersModel();
 
   async create(
     refreshToken: IRefreshToken,
@@ -78,6 +81,27 @@ class RefreshTokenService {
       };
     }
     return { status: 'SUCCESSFUL' };
+  }
+
+  async login(user: ILogin): Promise<ServiceResponse<{ accessToken: string;
+    refreshToken: string
+  }>> {
+    const userExists = await this.usersModel.findByEmail(user.email);
+    if (!userExists) return { status: 'INVALID_DATA', data: { message: 'User dont exists' } };
+    if (userExists.password !== user.password) {
+      return { status: 'INVALID_DATA',
+        data: { message: 'incorrect password' },
+      };
+    }
+    const { email, type, id } = userExists;
+    const accessToken = this.jwt.sign({ email, type, id }, '30000');
+    const refreshToken = this.jwt.sign({ id: userExists.id }, '7d');
+    await this.refreshTokenModel.create({ userId: userExists.id,
+      token: refreshToken,
+      createdAt: new Date(),
+      expiresIn: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+    });
+    return { status: 'SUCCESSFUL', data: { accessToken, refreshToken } };
   }
 
   async refreshToken(refreshToken: string): Promise<ServiceResponse<string>> {
