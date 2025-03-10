@@ -4,12 +4,14 @@ import IUsers from '../Interfaces/Users/IUsers';
 import IUsersModel from '../Interfaces/Users/IUsersModel';
 import ILogin from '../Interfaces/Users/ILogin';
 import JWT from '../Utils/JWT';
+import RefreshTokenModel from '../Models/refreshToken.model';
 
 export default class UsersService {
   constructor(
     private usersModel: IUsersModel = new UsersModel(),
     private jwt = JWT,
-  ) {}
+    private refreshTokenModel = new RefreshTokenModel(),
+  ) { }
 
   async findAll(): Promise<ServiceResponse<IUsers[]>> {
     const users = await this.usersModel.findAll();
@@ -110,15 +112,28 @@ export default class UsersService {
     };
   }
 
-  async login(user: ILogin): Promise<ServiceResponse<string>> {
+  // eslint-disable-next-line max-lines-per-function
+  async login(user: ILogin): Promise<ServiceResponse<{
+    accessToken: string;
+    refreshToken: string
+  }>> {
     const userExists = await this.usersModel.findByEmail(user.email);
     if (!userExists) return { status: 'INVALID_DATA', data: { message: 'User dont exists' } };
     if (userExists.password !== user.password) {
-      return { status: 'INVALID_DATA',
-        data: { message: 'incorrect password' } };
+      return {
+        status: 'INVALID_DATA',
+        data: { message: 'incorrect password' },
+      };
     }
-    const { email, type } = userExists as IUsers;
-    const token = this.jwt.sign({ email, type });
-    return { status: 'SUCCESSFUL', data: token };
+    const { email, type, id } = userExists;
+    const accessToken = this.jwt.sign({ email, type, id }, '30000');
+    const refreshToken = this.jwt.sign({ id: userExists.id }, '7d');
+    await this.refreshTokenModel.create({
+      userId: userExists.id,
+      token: refreshToken,
+      createdAt: new Date(),
+      expiresIn: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+    });
+    return { status: 'SUCCESSFUL', data: { accessToken, refreshToken } };
   }
 }

@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import RoutesController from '../Controller/RoutesController';
-import Validations from '../middlewares/validateLogin';
+import validateAuth from '../middlewares/validateAuth';
 
 const router = Router();
 const routesController = new RoutesController();
@@ -11,7 +11,7 @@ router.get(
 
 router.get(
   '/',
-  Validations.validateToken,
+  validateAuth.validateAccessToken,
   (req: Request, res:Response) => routesController.getAllRoutes(req, res),
 );
 

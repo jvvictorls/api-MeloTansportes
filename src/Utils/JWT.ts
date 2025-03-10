@@ -1,22 +1,13 @@
-import { SignOptions, JwtPayload, Secret, sign, verify } from 'jsonwebtoken';
+import { JwtPayload, Secret, sign, verify } from 'jsonwebtoken';
 
 export default class JWT {
   private static secret: Secret = process.env.JWT_SECRET || 'secret';
 
-  private static config: SignOptions = {
-    expiresIn: '10d',
-    algorithm: 'HS256',
-  };
-
-  static sign(payload: JwtPayload): string {
-    return sign({ ...payload }, this.secret, this.config);
+  static sign(payload: JwtPayload, expiresIn: string): string {
+    return sign({ ...payload }, this.secret, { expiresIn, algorithm: 'HS256' });
   }
 
   static verify(token: string): JwtPayload | string {
-    try {
-      return verify(token, this.secret) as JwtPayload;
-    } catch (e) {
-      return 'Token must be a valid token';
-    }
+    return verify(token, this.secret) as JwtPayload;
   }
 }

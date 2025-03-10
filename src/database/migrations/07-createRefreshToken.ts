@@ -17,6 +17,8 @@ export default {
           model: 'users',
           key: 'id',
         },
+        field: 'user_id',
+        onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
       token: {
@@ -26,10 +28,12 @@ export default {
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
+        field: 'created_at'
       },
       expiresIn: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+        field: 'expires_in'
       }
     })
   },
