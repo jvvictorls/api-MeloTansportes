@@ -1,5 +1,5 @@
 interface IRefreshToken {
-  id: number,
+  id?: number,
   userId: number,
   token: string,
   expiresIn: Date,

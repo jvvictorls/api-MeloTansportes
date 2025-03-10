@@ -6,14 +6,13 @@ import {
   InferCreationAttributes,
 } from 'sequelize'
 import db from '.'
-import SequelizeUsers from './SequelizeUsers';
 
 class SequelizeRefreshToken extends Model<InferAttributes<SequelizeRefreshToken>,
  InferCreationAttributes<SequelizeRefreshToken>> {
-  declare id: number;
+  declare id: CreationOptional<number>;
   declare userId: number;
   declare token: string;
-  declare expiresAt: Date;
+  declare expiresIn: Date;
   declare createdAt: Date;
  }
 
@@ -22,33 +21,33 @@ class SequelizeRefreshToken extends Model<InferAttributes<SequelizeRefreshToken>
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
-    
   },
   userId: {
     type: DataTypes.INTEGER,
     references: {
-      model: SequelizeUsers,
+      model: 'users',
       key: 'id',
     },
-    allowNull: false
-
+    allowNull: false,
+    field: 'user_id',
   },
   token: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  expiresAt: {
+  expiresIn: {
     type: DataTypes.DATE,
-    allowNull:false
-
+    allowNull:false,
+    field: 'expires_in'
   },
   createdAt: {
     type: DataTypes.DATE,
-    allowNull: false
-
+    allowNull: false,
+    field: 'created_at'
   }
  }, {
   modelName: 'refresh_token',
+  tableName: 'refresh_token',
   sequelize: db,
   underscored: true,
   timestamps: false,

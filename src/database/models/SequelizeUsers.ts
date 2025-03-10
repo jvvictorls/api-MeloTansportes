@@ -48,7 +48,7 @@ SequelizeUsers.init({
   timestamps: false,
 });
 
-SequelizeUsers.hasMany(SequelizeRefreshToken, {foreignKey: 'userId' as 'refreshTokens'});
+SequelizeUsers.hasMany(SequelizeRefreshToken, {foreignKey: 'userId' as 'refreshToken'});
 SequelizeRefreshToken.belongsTo(SequelizeUsers, {foreignKey: 'userId' as 'user'})
 
 export default SequelizeUsers;
