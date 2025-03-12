@@ -1,5 +1,6 @@
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import router from './Routes';
 import 'express-async-errors';
 
@@ -8,24 +9,19 @@ class App {
 
   constructor() {
     this.app = express();
-
     this.app.use(express.json());
     this.app.use(cookieParser());
-
     this.config();
-
     this.routes();
   }
 
   private config(): void {
-    const accessControl: express.RequestHandler = (_req, res, next) => {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
-      res.header('Access-Control-Allow-Headers', '*');
-      next();
-    };
-
-    this.app.use(accessControl);
+    this.app.use(cors(
+      {
+        origin: 'http://localhost:3000',
+        credentials: true,
+      },
+    ));
   }
 
   private routes(): void {

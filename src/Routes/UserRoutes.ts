@@ -34,9 +34,4 @@ router.delete(
   (req: Request, res: Response) => usersController.delete(req, res),
 );
 
-router.post(
-  '/login',
-  (req: Request, res: Response) => usersController.login(req, res),
-);
-
 export default router;

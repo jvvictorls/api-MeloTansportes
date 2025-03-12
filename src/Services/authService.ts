@@ -94,7 +94,7 @@ class RefreshTokenService {
       };
     }
     const { email, type, id } = userExists;
-    const accessToken = this.jwt.sign({ email, type, id }, '30000');
+    const accessToken = this.jwt.sign({ email, type, id }, '15m');
     const refreshToken = this.jwt.sign({ id: userExists.id }, '7d');
     await this.refreshTokenModel.create({ userId: userExists.id,
       token: refreshToken,
@@ -106,18 +106,19 @@ class RefreshTokenService {
 
   async refreshToken(refreshToken: string): Promise<ServiceResponse<string>> {
     if (!refreshToken) {
-      return {
-        status: 'INVALID_DATA',
-        data: { message: 'missing refresh_token' },
+      return { status: 'INVALID_DATA', data: { message: 'missing refresh-token' },
       };
     }
     const findRefreshToken = await this.refreshTokenModel.findByToken(refreshToken);
     if (!findRefreshToken) {
-      return { status: 'NOT_FOUND', data: { message: 'invalid Token' } };
+      return { status: 'NOT_FOUND', data: { message: 'invalid token' } };
     }
     try {
-      const payload = this.jwt.verify(refreshToken) as { userId: number };
-      const newAccessToken = this.jwt.sign(payload, '30000');
+      const decoded = this.jwt.verify(refreshToken) as { userId: number, exp: number };
+      if (Date.now() > decoded.exp * 1000) {
+        return { status: 'UNAUTHORIZED', data: { message: 'Token expired' } };
+      }
+      const newAccessToken = this.jwt.sign({ userId: decoded.userId }, '15m');
       return { status: 'SUCCESSFUL', data: newAccessToken };
     } catch (e: any) {
       return { status: 'UNAUTHORIZED', data: { message: e.message } };

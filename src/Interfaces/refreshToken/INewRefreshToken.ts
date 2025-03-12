@@ -1,9 +1,8 @@
-interface IRefreshToken {
-  id: number,
+interface INewRefreshToken {
   userId: number,
   token: string,
   expiresIn: Date,
   createdAt: Date
 }
 
-export default IRefreshToken;
+export default INewRefreshToken;

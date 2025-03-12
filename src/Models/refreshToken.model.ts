@@ -1,10 +1,11 @@
 import SequelizeRefreshToken from '../database/models/SequelizeRefreshToken';
 import IRefreshToken from '../Interfaces/refreshToken/IRefreshToken';
+import INewRefreshToken from '../Interfaces/refreshToken/INewRefreshToken';
 
 class RefreshTokenModel {
   private sequelizeRefreshToken = SequelizeRefreshToken;
 
-  async create(refreshToken: IRefreshToken): Promise<IRefreshToken> {
+  async create(refreshToken: INewRefreshToken): Promise<IRefreshToken> {
     const newRefreshToken = await this.sequelizeRefreshToken.create(refreshToken);
     return newRefreshToken;
   }
