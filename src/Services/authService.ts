@@ -124,6 +124,23 @@ class RefreshTokenService {
       return { status: 'UNAUTHORIZED', data: { message: e.message } };
     }
   }
+
+  async logout(refreshToken: string): Promise<ServiceResponse<string>> {
+    if (!refreshToken) {
+      return { status: 'INVALID_DATA', data: { message: 'missing refresh-token' },
+      };
+    }
+    const findRefreshToken = await this.refreshTokenModel.findByToken(refreshToken);
+    if (!findRefreshToken) {
+      return { status: 'NOT_FOUND', data: { message: 'invalid token' } };
+    }
+    const deleteRefreshToken = await this.refreshTokenModel.delete(findRefreshToken.id);
+    if (deleteRefreshToken) {
+      return { status: 'INTERNAL_SERVER_ERROR', data: { message: 'Failed to delete refreshToken' },
+      };
+    }
+    return { status: 'SUCCESSFUL', data: 'Logout successful' };
+  }
 }
 
 export default RefreshTokenService;

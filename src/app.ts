@@ -29,6 +29,7 @@ class App {
   }
 
   public start(PORT: string | number): void {
+    // eslint-disable-next-line no-console
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
   }
 }

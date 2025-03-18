@@ -14,4 +14,9 @@ router.post(
   (req: Request, res: Response) => authController.refreshAccessToken(req, res),
 );
 
+router.delete(
+  '/logout',
+  (req: Request, res: Response) => authController.logout(req, res),
+);
+
 export default router;
