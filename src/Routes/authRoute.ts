@@ -4,6 +4,11 @@ import AuthController from '../Controller/auth.Controller';
 const router = Router();
 const authController = new AuthController();
 
+router.get(
+  '/me',
+  (req: Request, res: Response) => authController.getUserByToken(req, res),
+);
+
 router.post(
   '/login',
   (req: Request, res: Response) => authController.login(req, res),

@@ -95,7 +95,7 @@ class RefreshTokenService {
     }
     const { email, type, id } = userExists;
     const accessToken = this.jwt.sign({ email, type, id }, '15m');
-    const refreshToken = this.jwt.sign({ id: userExists.id }, '7d');
+    const refreshToken = this.jwt.sign({ id }, '7d');
     await this.refreshTokenModel.create({ userId: userExists.id,
       token: refreshToken,
       createdAt: new Date(),
@@ -104,6 +104,7 @@ class RefreshTokenService {
     return { status: 'SUCCESSFUL', data: { accessToken, refreshToken } };
   }
 
+  // eslint-disable-next-line max-lines-per-function
   async refreshToken(refreshToken: string): Promise<ServiceResponse<string>> {
     if (!refreshToken) {
       return { status: 'INVALID_DATA', data: { message: 'missing refresh-token' },
@@ -114,11 +115,18 @@ class RefreshTokenService {
       return { status: 'NOT_FOUND', data: { message: 'invalid token' } };
     }
     try {
-      const decoded = this.jwt.verify(refreshToken) as { userId: number, exp: number };
-      if (Date.now() > decoded.exp * 1000) {
+      const decoded = this.jwt.verify(refreshToken) as IRefreshToken;
+      if (Date.now() > new Date(decoded.expiresIn).getTime()) {
         return { status: 'UNAUTHORIZED', data: { message: 'Token expired' } };
       }
-      const newAccessToken = this.jwt.sign({ userId: decoded.userId }, '15m');
+      const user = await this.usersModel.findById(decoded.id);
+      if (!user) {
+        return { status: 'NOT_FOUND', data: { message: 'User not found anything' } };
+      }
+      const newAccessToken = this.jwt.sign(
+        { id: user.id, email: user.email, type: user.type },
+        '15m',
+      );
       return { status: 'SUCCESSFUL', data: newAccessToken };
     } catch (e: any) {
       return { status: 'UNAUTHORIZED', data: { message: e.message } };
@@ -140,6 +148,21 @@ class RefreshTokenService {
       };
     }
     return { status: 'SUCCESSFUL', data: 'Logout successful' };
+  }
+
+  async getUserFromToken(token: string): Promise<ServiceResponse<{ userId: number }>> {
+    if (!token) {
+      return { status: 'INVALID_DATA', data: { message: 'missing token' } };
+    }
+    try {
+      const decoded = this.jwt.verify(token) as { userId: number, exp: number };
+      if (Date.now() > decoded.exp * 1000) {
+        return { status: 'UNAUTHORIZED', data: { message: 'Token expired' } };
+      }
+      return { status: 'SUCCESSFUL', data: { userId: decoded.userId } };
+    } catch (e: any) {
+      return { status: 'UNAUTHORIZED', data: { message: e.message } };
+    }
   }
 }
 

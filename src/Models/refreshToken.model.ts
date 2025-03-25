@@ -15,9 +15,9 @@ class RefreshTokenModel {
     return findRefreshToken;
   }
 
-  async findByToken(token: string): Promise<IRefreshToken | null> {
+  async findByToken(token: string): Promise<IRefreshToken | undefined> {
     const findRefreshToken = await this.sequelizeRefreshToken.findOne({ where: { token } });
-    return findRefreshToken;
+    return findRefreshToken?.dataValues;
   }
 
   async update(refreshToken: IRefreshToken): Promise<void> {
