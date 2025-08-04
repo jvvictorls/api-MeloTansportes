@@ -1,4 +1,4 @@
-import UsersModel from '../models/Users.model';
+import UsersModel from '../models/users.model';
 import { ServiceResponse } from '../utils/serviceResponse';
 import IUsers from '../Interfaces/Users/IUsers';
 import IUsersModel from '../Interfaces/Users/IUsersModel';

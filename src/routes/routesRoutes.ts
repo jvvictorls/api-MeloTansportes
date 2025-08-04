@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import RoutesController from '../controller/RoutesController';
+import RoutesController from '../controller/routesController';
 import validateAuth from '../middlewares/validateAuth';
 
 const router = Router();
