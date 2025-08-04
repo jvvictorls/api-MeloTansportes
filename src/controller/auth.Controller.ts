@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import mapStatusHTTP from '../Utils/mapStatusHttp';
-import AuthService from '../Services/authService';
+import mapStatusHTTP from '../utils/mapStatusHttp';
+import AuthService from '../services/authService';
 
 class AuthController {
   constructor(

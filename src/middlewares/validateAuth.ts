@@ -1,5 +1,5 @@
 import { Response, NextFunction } from 'express';
-import JWT from '../Utils/JWT';
+import JWT from '../utils/JWT';
 import RequestWithUser from '../Interfaces/Express/RequestWithUser';
 
 class ValidateAuth {

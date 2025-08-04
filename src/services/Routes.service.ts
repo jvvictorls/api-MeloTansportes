@@ -1,5 +1,5 @@
-import RoutesModel from '../Models/Routes.model';
-import { ServiceResponse } from '../Utils/serviceResponse';
+import RoutesModel from '../models/Routes.model';
+import { ServiceResponse } from '../utils/serviceResponse';
 import { IRoutes } from '../Interfaces/Routes/IRoutes';
 
 const NOT_FOUND = 'No route found';

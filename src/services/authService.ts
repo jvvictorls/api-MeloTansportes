@@ -1,9 +1,9 @@
 import IRefreshToken from '../Interfaces/refreshToken/IRefreshToken';
-import RefreshTokenModel from '../Models/refreshToken.model';
-import JWT from '../Utils/JWT';
-import { ServiceResponse } from '../Utils/serviceResponse';
+import RefreshTokenModel from '../models/refreshToken.model';
+import JWT from '../utils/JWT';
+import { ServiceResponse } from '../utils/serviceResponse';
 import ILogin from '../Interfaces/Users/ILogin';
-import UsersModel from '../Models/Users.model';
+import UsersModel from '../models/Users.model';
 
 class RefreshTokenService {
   private refreshTokenModel = new RefreshTokenModel();

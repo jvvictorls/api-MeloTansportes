@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import CollaboratorsService from '../Services/Collaborators.service';
-import mapStatusHTTP from '../Utils/mapStatusHttp';
+import CollaboratorsService from '../services/Collaborators.service';
+import mapStatusHTTP from '../utils/mapStatusHttp';
 
 export default class CollaboratorsController {
   private collaboratorsService = new CollaboratorsService();

@@ -1,5 +1,5 @@
-import UsersModel from '../Models/Users.model';
-import { ServiceResponse } from '../Utils/serviceResponse';
+import UsersModel from '../models/Users.model';
+import { ServiceResponse } from '../utils/serviceResponse';
 import IUsers from '../Interfaces/Users/IUsers';
 import IUsersModel from '../Interfaces/Users/IUsersModel';
 

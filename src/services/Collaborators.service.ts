@@ -1,6 +1,6 @@
-import CollaboratorsModel from '../Models/collaborators.model';
+import CollaboratorsModel from '../models/collaborators.model';
 import ICollaborators from '../Interfaces/collaborators/ICollaborators';
-import { ServiceResponse } from '../Utils/serviceResponse';
+import { ServiceResponse } from '../utils/serviceResponse';
 
 export default class CollaboratorsService {
   private collaboratorsModel = new CollaboratorsModel();
