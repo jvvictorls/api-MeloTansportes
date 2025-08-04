@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import UsersService from '../services/Users.service';
+import UsersService from '../services/users.service';
 import mapStatusHTTP from '../utils/mapStatusHttp';
 
 export default class UsersController {

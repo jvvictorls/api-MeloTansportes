@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import RoutesService from '../services/Routes.service';
+import RoutesService from '../services/routes.service';
 import mapStatusHTTP from '../utils/mapStatusHttp';
 
 export default class RoutesController {

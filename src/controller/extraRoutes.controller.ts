@@ -1,4 +1,4 @@
-import ExtraRoutesService from '../services/ExtraRoutes.service';
+import ExtraRoutesService from '../services/extraRoutes.service';
 import mapStatusHTTP from '../utils/mapStatusHttp';
 
 export default class ExtraRoutesController {

@@ -1,4 +1,4 @@
-import RoutesModel from '../models/Routes.model';
+import RoutesModel from '../models/routes.model';
 import { ServiceResponse } from '../utils/serviceResponse';
 import { IRoutes } from '../Interfaces/Routes/IRoutes';
 
