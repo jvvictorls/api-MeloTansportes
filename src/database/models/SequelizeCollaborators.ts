@@ -15,11 +15,12 @@ InferCreationAttributes<SequelizeCollaborators>> {
   declare city: string;
   declare street: string;
   declare number: string;
-  declare phone: string;
+  declare phone: string | undefined;
   declare boardingTime: string;
+  declare shift: string | undefined;
   declare company: string;
-  declare department: string;
-  declare position: string;
+  declare department: string | undefined;
+  declare position: string | undefined;
   declare createdAt: Date;
   declare updatedAt: Date;
 }
@@ -81,7 +82,8 @@ SequelizeCollaborators.init({
     type: DataTypes.DATE,
     allowNull: false,
     field: 'updated_at',
-  }  
+  },
+  shift: ''
 }, {
   sequelize: db,
   modelName: 'collaborators',

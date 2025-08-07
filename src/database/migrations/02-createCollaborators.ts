@@ -28,16 +28,16 @@ export default {
       },
       number: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       boardingTime: {
         type: DataTypes.STRING,
-        allowNull: false,
         field: 'boarding_time',
+      },
+      shift: {
+        type: DataTypes.STRING
       },
       phone: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       company: {
         type: DataTypes.STRING,
@@ -45,11 +45,9 @@ export default {
       },
       department: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       position: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       createdAt: {
         type: DataTypes.DATE,

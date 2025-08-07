@@ -6,10 +6,11 @@ export default interface ICollaborators {
   street: string,
   number: string,
   boardingTime: string,
-  phone: string,
+  shift?: string
+  phone?: string,
   company: string
-  department: string,
-  position: string,
+  department?: string,
+  position?: string,
   createdAt: Date
   updatedAt: Date
 }
