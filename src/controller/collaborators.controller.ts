@@ -16,8 +16,11 @@ export default class CollaboratorsController {
 
   async createManyCollaborators(req: Request, res: Response) {
     const collaborators = req.body;
-    const response = await this.collaboratorsService.createManyCollaborators(collaborators);
-    return res.status(response.status === 'CREATED' ? 201 : 409).json(response);
+    const { status, data } = await this.collaboratorsService.createManyCollaborators(collaborators);
+    if (status !== 'CREATED') {
+      return res.status(mapStatusHTTP(status)).json(data);
+    }
+    return res.status(201).json(data);
   }
 
   async getAllCollaborators(req: Request, res: Response) {

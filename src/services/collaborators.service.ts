@@ -21,9 +21,6 @@ export default class CollaboratorsService {
   async createManyCollaborators(collaborators: ICollaborators[]):
   Promise<ServiceResponse<ICollaborators[]>> {
     const newCollaborators = await this.collaboratorsModel.createManyCollaborators(collaborators);
-    if (!newCollaborators) {
-      return { status: 'CONFLICT', data: { message: 'Collaborators already exists' } };
-    }
     return { status: 'CREATED', data: newCollaborators };
   }
 
