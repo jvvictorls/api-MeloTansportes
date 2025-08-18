@@ -10,15 +10,30 @@ export default {
         primaryKey: true,
         allowNull: false
       },
+      admissionDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        field: 'admission_date',
+      },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      neighborhood: {
+       shift: {
+        type: DataTypes.STRING
+      },
+      phone: {
+        type: DataTypes.STRING,
+      },
+      zipCode: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       city: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      neighborhood: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -27,16 +42,6 @@ export default {
         allowNull: false,
       },
       number: {
-        type: DataTypes.STRING,
-      },
-      boardingTime: {
-        type: DataTypes.STRING,
-        field: 'boarding_time',
-      },
-      shift: {
-        type: DataTypes.STRING
-      },
-      phone: {
         type: DataTypes.STRING,
       },
       company: {

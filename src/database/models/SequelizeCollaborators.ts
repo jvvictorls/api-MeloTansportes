@@ -10,14 +10,15 @@ import db from '.';
 class SequelizeCollaborators extends Model<InferAttributes<SequelizeCollaborators>,
 InferCreationAttributes<SequelizeCollaborators>> {
   declare id: CreationOptional<number>;
+  declare admissionDate: Date;
   declare name: string;
-  declare neighborhood: string;
+  declare shift: string | undefined;
+  declare phone: string | undefined;
+  declare zipCode: string;
   declare city: string;
+  declare neighborhood: string;
   declare street: string;
   declare number: string;
-  declare phone: string | undefined;
-  declare boardingTime: string;
-  declare shift: string | undefined;
   declare company: string;
   declare department: string | undefined;
   declare position: string | undefined;
@@ -32,18 +33,35 @@ SequelizeCollaborators.init({
     primaryKey: true,
     allowNull: false,
   },
+  admissionDate: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    field: 'admission_date',
+  },
   name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  shift: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  phone: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  zipCode: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  city: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   neighborhood: {
     type: DataTypes.STRING,
     allowNull: false,
-  },
-  city: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
+  }, 
   street: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -51,15 +69,6 @@ SequelizeCollaborators.init({
   number: {
     type: DataTypes.STRING,
     allowNull: false
-  },
-  phone: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  boardingTime: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    field: 'boarding_time',
   },
   company: {
     type: DataTypes.STRING,
@@ -83,7 +92,6 @@ SequelizeCollaborators.init({
     allowNull: false,
     field: 'updated_at',
   },
-  shift: ''
 }, {
   sequelize: db,
   modelName: 'collaborators',

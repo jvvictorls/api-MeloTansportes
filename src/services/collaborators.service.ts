@@ -1,24 +1,25 @@
 import CollaboratorsModel from '../models/collaborators.model';
-import ICollaborators from '../Interfaces/collaborators/ICollaborators';
+import ICollaborators, { ICollaboratorsCreate } from '../Interfaces/collaborators/ICollaborators';
 import { ServiceResponse } from '../utils/serviceResponse';
 
 export default class CollaboratorsService {
   private collaboratorsModel = new CollaboratorsModel();
 
-  async createCollaborator(collaborator: ICollaborators): Promise<ServiceResponse<ICollaborators>> {
+  async createCollaborator(collaborator: ICollaboratorsCreate)
+    : Promise<ServiceResponse<ICollaborators>> {
     const checkIfCollaboratorExists = await this.collaboratorsModel
       .findCollaboratorByName(collaborator.name);
     if (checkIfCollaboratorExists) {
       return {
         status: 'CONFLICT',
-        data: { message: 'Parece já existir um colaborador com esse nome' },
+        data: { message: 'Already exists a collaborator with this name' },
       };
     }
     const newCollaborator = await this.collaboratorsModel.createCollaborator(collaborator);
     return { status: 'CREATED', data: newCollaborator };
   }
 
-  async createManyCollaborators(collaborators: ICollaborators[]):
+  async createManyCollaborators(collaborators: ICollaboratorsCreate[]):
   Promise<ServiceResponse<ICollaborators[]>> {
     const newCollaborators = await this.collaboratorsModel.createManyCollaborators(collaborators);
     return { status: 'CREATED', data: newCollaborators };
