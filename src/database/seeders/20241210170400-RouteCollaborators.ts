@@ -8,16 +8,34 @@ module.exports = {
     await queryInterface.bulkInsert('routes_collaborators', [
       {
         route_id: 1,
-        collaborator_id: 1
+        collaborator_id: 1,
+        boarding_time: '08:00:00'
       },
       {
         route_id: 1,
-        collaborator_id: 2
+        collaborator_id: 2,
+        boarding_time: '09:00:00'
       },
       {
         route_id: 1,
-        collaborator_id: 3
+        collaborator_id: 3,
+        boarding_time: '10:00:00'
       },
+      {
+        route_id: 2,
+        collaborator_id: 1,
+        boarding_time: '08:30:00'
+      },
+      {
+        route_id: 2,
+        collaborator_id: 2,
+        boarding_time: '09:30:00'
+      },
+      {
+        route_id: 3,
+        collaborator_id: 3,
+        boarding_time: '10:30:00'
+      }
       
     ])
   },

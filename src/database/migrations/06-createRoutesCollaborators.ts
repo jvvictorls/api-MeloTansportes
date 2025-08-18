@@ -30,6 +30,11 @@ export default {
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
+      },
+      boardingTime: {
+        type: DataTypes.TIME,
+        allowNull: true,
+        field: 'boarding_time',
       }
     })
   },

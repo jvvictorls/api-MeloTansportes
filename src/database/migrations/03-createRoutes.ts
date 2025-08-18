@@ -25,7 +25,8 @@ export default {
     maxCollaborators: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      field: 'max_collaborators'
+      field: 'max_collaborators',
+      defaultValue: 15
     },
     shift: {
       type: DataTypes.STRING,

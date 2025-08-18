@@ -47,6 +47,8 @@ SequelizeRoutes.init({
   },
   maxCollaborators: {
     type: DataTypes.INTEGER,
+    defaultValue: 15,
+    field: 'max_collaborators',
     allowNull: false,
   },
   shift: {
