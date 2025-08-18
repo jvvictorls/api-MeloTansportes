@@ -12,9 +12,11 @@ export default {
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
+                unique: true,
             },
             email: {
                 type: DataTypes.STRING,
+                unique: true,
                 allowNull: false,
             },
             password: {
@@ -22,7 +24,7 @@ export default {
                 allowNull: false,
             },
             type: {
-                type: DataTypes.ENUM('admin', 'user', 'driver', 'superadmin'),
+                type: DataTypes.ENUM('admin', 'user', 'driver', 'superadmin', 'supervisor', 'coordinator', 'manager'),
                 allowNull: false,
             }
         });

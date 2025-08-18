@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import UsersModel from '../models/users.model';
 import { ServiceResponse } from '../utils/serviceResponse';
 import IUsers from '../Interfaces/Users/IUsers';
@@ -50,15 +51,24 @@ export default class UsersService {
     };
   }
 
+  // eslint-disable-next-line max-lines-per-function
   async create(user: IUsers): Promise<ServiceResponse<IUsers>> {
-    const userExists = await this.usersModel.findByEmail(user.email);
-    if (userExists) {
+    if (!user.email || !user.password) {
+      return {
+        status: 'BAD_REQUEST',
+        data: { message: 'Email and password are required' },
+      };
+    }
+    const { status } = await this.findByEmail(user.email);
+    if (status === 'SUCCESSFUL') {
       return {
         status: 'CONFLICT',
         data: { message: 'User already exists' },
       };
     }
-    const createUser = await this.usersModel.create(user);
+    const hashedPassword = bcrypt.hashSync((user.password), 10);
+    const userWithHashedPassword: IUsers = { ...user, password: hashedPassword };
+    const createUser = await this.usersModel.create(userWithHashedPassword);
     return {
       status: 'CREATED',
       data: createUser,

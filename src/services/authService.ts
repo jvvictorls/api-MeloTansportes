@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt';
 import IRefreshToken from '../Interfaces/refreshToken/IRefreshToken';
 import RefreshTokenModel from '../models/refreshToken.model';
 import JWT from '../utils/jwt';
@@ -88,7 +89,7 @@ class RefreshTokenService {
   }>> {
     const userExists = await this.usersModel.findByEmail(user.email);
     if (!userExists) return { status: 'INVALID_DATA', data: { message: 'User dont exists' } };
-    if (userExists.password !== user.password) {
+    if (!bcrypt.compareSync(user.password, userExists.password)) {
       return { status: 'INVALID_DATA',
         data: { message: 'incorrect password' },
       };

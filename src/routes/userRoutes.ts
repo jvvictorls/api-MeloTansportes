@@ -20,7 +20,7 @@ router.post(
 );
 
 router.post(
-  '/signup',
+  '/register',
   (req: Request, res: Response) => usersController.create(req, res),
 );
 
