@@ -1,5 +1,5 @@
 import { QueryInterface, DataTypes, Model } from "sequelize";
-import ICollaborators from "../../Interfaces/collaborators/ICollaborators";
+import {ICollaborators} from "../../Interfaces/collaborators/ICollaborators";
 
 export default {
   up(queryInterface: QueryInterface) {

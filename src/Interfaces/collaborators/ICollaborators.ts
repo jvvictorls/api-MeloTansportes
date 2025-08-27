@@ -1,4 +1,4 @@
-export default interface ICollaborators {
+export interface ICollaborators {
   id: number
   admissionDate: Date
   name: string
@@ -14,6 +14,16 @@ export default interface ICollaborators {
   position?: string,
   createdAt: Date
   updatedAt: Date
+}
+
+export interface ICollaboratorsUpdate {
+  id: number,
+  name: string,
+  phone: string,
+  neighborhood: string,
+  department: string,
+  boardingTime: string
+
 }
 
 export interface ICollaboratorsCreate {

@@ -1,4 +1,4 @@
-import ICollaborators from './ICollaborators';
+import { ICollaborators } from './ICollaborators';
 
 export default interface ICollaboratorsModel {
   createCollaborator(collaborator: ICollaborators): Promise<ICollaborators>;

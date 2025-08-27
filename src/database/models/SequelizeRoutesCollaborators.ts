@@ -2,8 +2,6 @@ import {
   DataTypes, CreationOptional, InferAttributes, InferCreationAttributes, Model,
 } from 'sequelize'
 import db from '.'
-import SequelizeCollaborators from './SequelizeCollaborators'
-import SequelizeRoutes from './SequelizeRoutes'
 
 export class RoutesCollaborators extends Model<InferAttributes<RoutesCollaborators>, InferCreationAttributes<RoutesCollaborators>> {
   declare id: CreationOptional<number>
