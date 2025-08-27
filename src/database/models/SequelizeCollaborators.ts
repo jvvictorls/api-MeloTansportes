@@ -6,6 +6,8 @@ import {
   CreationOptional,
 } from 'sequelize';
 import db from '.';
+import SequelizeRoutesCollaborators from './SequelizeRoutesCollaborators';
+import SequelizeRoutes from './SequelizeRoutes';
 
 class SequelizeCollaborators extends Model<InferAttributes<SequelizeCollaborators>,
 InferCreationAttributes<SequelizeCollaborators>> {
@@ -53,6 +55,7 @@ SequelizeCollaborators.init({
   zipCode: {
     type: DataTypes.STRING,
     allowNull: true,
+    field: 'zip_code',
   },
   city: {
     type: DataTypes.STRING,
@@ -96,6 +99,17 @@ SequelizeCollaborators.init({
   sequelize: db,
   modelName: 'collaborators',
   underscored: true,
+});
+
+SequelizeCollaborators.belongsToMany(SequelizeRoutes, {
+  through: 'routes_collaborators',
+  foreignKey: 'collaboratorId',
+  as: 'routes',
+});
+SequelizeRoutes.belongsToMany(SequelizeCollaborators, {
+  through: 'routes_collaborators',
+  foreignKey: 'routeId',
+  as: 'collaborators',
 });
 
 export default SequelizeCollaborators;

@@ -9,7 +9,7 @@ export default {
         primaryKey: true,
         allowNull: false
       },
-      route_id: {
+      routeId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         field: 'route_id',
@@ -20,7 +20,7 @@ export default {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      collaborator_Id: {
+      collaboratorId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         field: 'collaborator_id',
@@ -35,7 +35,18 @@ export default {
         type: DataTypes.TIME,
         allowNull: true,
         field: 'boarding_time',
-      }
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        field: 'created_at',
+        defaultValue: DataTypes.NOW,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        field: 'updated_at',
+      },
     })
   },
   down: async (queryInterface: QueryInterface) => {

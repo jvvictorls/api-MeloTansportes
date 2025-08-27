@@ -1,6 +1,7 @@
 'use strict'
 
 import { QueryInterface, Sequelize } from 'sequelize'
+import SequelizeRoutesCollaborators from '../models/SequelizeRoutesCollaborators'
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -9,32 +10,44 @@ module.exports = {
       {
         route_id: 1,
         collaborator_id: 1,
-        boarding_time: '08:00:00'
+        boarding_time: '08:00:00',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       {
         route_id: 1,
         collaborator_id: 2,
-        boarding_time: '09:00:00'
+        boarding_time: '09:00:00',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       {
         route_id: 1,
         collaborator_id: 3,
-        boarding_time: '10:00:00'
+        boarding_time: '10:00:00',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       {
         route_id: 2,
         collaborator_id: 1,
-        boarding_time: '08:30:00'
+        boarding_time: '08:30:00',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       {
         route_id: 2,
         collaborator_id: 2,
-        boarding_time: '09:30:00'
+        boarding_time: '09:30:00',
+        created_at: new Date(),
+        updated_at: new Date()
       },
       {
         route_id: 3,
         collaborator_id: 3,
-        boarding_time: '10:30:00'
+        boarding_time: '10:30:00',
+        created_at: new Date(),
+        updated_at: new Date()
       }
       
     ])

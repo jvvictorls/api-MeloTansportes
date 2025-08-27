@@ -28,6 +28,7 @@ export default {
       zipCode: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: 'zip_code',
       },
       city: {
         type: DataTypes.STRING,

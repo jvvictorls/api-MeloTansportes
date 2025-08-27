@@ -7,8 +7,6 @@ import {
 } from 'sequelize';
 import db from '.';
 
-import SequelizeCollaborators from './SequelizeCollaborators';
-
 class SequelizeRoutes extends Model<InferAttributes<SequelizeRoutes>,
 InferCreationAttributes<SequelizeRoutes>> {
   declare id: CreationOptional<number>;
@@ -75,18 +73,6 @@ SequelizeRoutes.init({
   underscored: true,
   timestamps: false,
 });
-
-SequelizeRoutes.belongsToMany(SequelizeCollaborators, {
-  through: 'routes_collaborators',
-  foreignKey: 'route_id',
-  timestamps: false,
-});
-SequelizeCollaborators.belongsToMany(SequelizeRoutes, {
-  through: 'routes_collaborators',
-  foreignKey: 'collaborator_id',
-  timestamps: false,
-});
-
 
 export default SequelizeRoutes;
 

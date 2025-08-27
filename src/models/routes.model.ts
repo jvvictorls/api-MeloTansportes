@@ -1,6 +1,6 @@
 import IRoutesModel from '../Interfaces/Routes/IRoutesModel';
 import { IRoutes } from '../Interfaces/Routes/IRoutes';
-import SequelizeRoutes from '../database/models/sequelizeRoutes';
+import SequelizeRoutes from '../database/models/SequelizeRoutes';
 import SequelizeCollaborators from '../database/models/SequelizeCollaborators';
 
 export default class RoutesModel implements IRoutesModel {
@@ -12,11 +12,12 @@ export default class RoutesModel implements IRoutesModel {
       include: [
         {
           model: SequelizeCollaborators,
+          foreignKey: 'routeId',
           as: 'collaborators',
-          attributes: ['name', 'neighborhood', 'phone', 'department',
-          ],
+          attributes: ['id', 'name', 'neighborhood', 'phone', 'department'],
           through: {
-            attributes: ['boarding_time'] },
+            attributes: ['boarding_time'],
+          },
         },
       ],
     });
@@ -29,7 +30,7 @@ export default class RoutesModel implements IRoutesModel {
         {
           model: SequelizeCollaborators,
           as: 'collaborators',
-          attributes: ['name', 'neighborhood', 'phone', 'department',
+          attributes: ['id', 'name', 'neighborhood', 'phone', 'department',
           ],
           through: {
             attributes: ['boarding_time'],
