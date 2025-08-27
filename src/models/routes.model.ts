@@ -5,6 +5,7 @@ import SequelizeCollaborators from '../database/models/SequelizeCollaborators';
 
 export default class RoutesModel implements IRoutesModel {
   private model = SequelizeRoutes;
+
   private collaboratorModel = SequelizeCollaborators;
 
   async getAllRoutes(): Promise<IRoutes[]> {
@@ -16,7 +17,7 @@ export default class RoutesModel implements IRoutesModel {
           as: 'collaborators',
           attributes: ['id', 'name', 'neighborhood', 'phone', 'department'],
           through: {
-            attributes: ['boarding_time'],
+            attributes: [['boarding_time', 'boardingTime']],
           },
         },
       ],
@@ -33,7 +34,7 @@ export default class RoutesModel implements IRoutesModel {
           attributes: ['id', 'name', 'neighborhood', 'phone', 'department',
           ],
           through: {
-            attributes: ['boarding_time'],
+            attributes: [['boarding_time', 'boardingTime']],
           },
         },
       ],

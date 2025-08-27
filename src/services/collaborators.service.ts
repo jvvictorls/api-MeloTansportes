@@ -1,5 +1,8 @@
+import {
+  ICollaboratorsCreate,
+  ICollaborators,
+  ICollaboratorsUpdate } from '../Interfaces/collaborators/ICollaborators';
 import CollaboratorsModel from '../models/collaborators.model';
-import ICollaborators, { ICollaboratorsCreate } from '../Interfaces/collaborators/ICollaborators';
 import { ServiceResponse } from '../utils/serviceResponse';
 
 export default class CollaboratorsService {
@@ -41,11 +44,16 @@ export default class CollaboratorsService {
     return { status: 'SUCCESSFUL', data: collaborator };
   }
 
-  async updateCollaboratorById(collaborator: ICollaborators):
+  async updateCollaboratorById(collaborator: ICollaboratorsUpdate):
   Promise<ServiceResponse<ICollaborators>> {
-    const updatedCollaborator = await this.collaboratorsModel.updateCollaboratorById(collaborator);
+    await this.findCollaboratorById(collaborator.id);
+    const updatedCollaborator = await this
+      .collaboratorsModel.updateCollaboratorById(collaborator);
     if (!updatedCollaborator) {
-      return { status: 'NOT_FOUND', data: { message: 'Collaborator not found' } };
+      return {
+        status: 'BAD_REQUEST',
+        data: { message: 'It was not possible to update the collaborator' },
+      };
     }
     return { status: 'SUCCESSFUL', data: updatedCollaborator };
   }

@@ -1,8 +1,14 @@
-import ICollaborators, { ICollaboratorsCreate } from '../Interfaces/collaborators/ICollaborators';
+import {
+  ICollaborators,
+  ICollaboratorsCreate,
+  ICollaboratorsUpdate } from '../Interfaces/collaborators/ICollaborators';
 import SequelizeCollaborators from '../database/models/SequelizeCollaborators';
+import SequelizeRoutesCollaborators from '../database/models/SequelizeRoutesCollaborators';
 
 export default class CollaboratorsModel {
   private model = SequelizeCollaborators;
+
+  private routeCollaboratorModel = SequelizeRoutesCollaborators;
 
   async createCollaborator(collaborator: ICollaboratorsCreate): Promise<ICollaborators> {
     const newCollaborator = await this.model.create(collaborator);
@@ -31,11 +37,17 @@ export default class CollaboratorsModel {
     return collaborators.map((collaborator) => collaborator.dataValues);
   }
 
-  async updateCollaboratorById(collaborator: ICollaborators): Promise<ICollaborators | null> {
+  async updateCollaboratorById(collaborator: ICollaboratorsUpdate): Promise<ICollaborators | null> {
     const updateCollaborator = await this.model.update(collaborator, {
       where: { id: collaborator.id },
     });
     if (updateCollaborator[0] === 0) return null;
+    const updateBoardingTime = await this.routeCollaboratorModel.update(
+      { boardingTime: collaborator.boardingTime,
+      },
+      { where: { collaboratorId: collaborator.id } },
+    );
+    if (updateBoardingTime[0] === 0) return null;
     const collaboratorUpdated = await this.findCollaboratorById(collaborator.id);
     return collaboratorUpdated;
   }
