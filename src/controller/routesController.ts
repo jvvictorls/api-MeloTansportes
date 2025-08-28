@@ -14,7 +14,7 @@ export default class RoutesController {
     return res.status(200).json(data);
   }
 
-  async getAllRoutes(req: Request, res: Response) {
+  async getAllRoutes(_req: Request, res: Response) {
     const { status, data } = await this.routesService.getAllRoutes();
     if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
     return res.status(200).json(data);
@@ -35,6 +35,15 @@ export default class RoutesController {
     const { status, data } = await this.routesService.addCollaboratorToRoute(
       Number(routeId),
       Number(collaboratorId),
+    );
+    if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
+    return res.status(200).json(data);
+  }
+
+  async updateLastUpdate(req: Request, res: Response) {
+    const { routeId } = req.params;
+    const { status, data } = await this.routesService.updateLastUpdate(
+      Number(routeId),
     );
     if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
     return res.status(200).json(data);

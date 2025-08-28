@@ -76,4 +76,19 @@ export default class RoutesService {
       data: route,
     };
   }
+
+  async updateLastUpdate(routeId: number): Promise<ServiceResponse<IRoutes>> {
+    await this.getOneRoute(routeId);
+    const updatedRoute = await this.routesModel.updateLastUpdate(routeId);
+    if (!updatedRoute) {
+      return {
+        status: 'NOT_FOUND',
+        data: { message: NOT_FOUND },
+      };
+    }
+    return {
+      status: 'SUCCESSFUL',
+      data: updatedRoute,
+    };
+  }
 }

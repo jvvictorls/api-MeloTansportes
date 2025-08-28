@@ -79,4 +79,13 @@ export default class RoutesModel implements IRoutesModel {
     });
     return updatedRoute;
   }
+
+  async updateLastUpdate(routeId: number): Promise<IRoutes | null> {
+    await this.model.update(
+      { updatedAt: new Date() },
+      { where: { id: routeId } },
+    );
+    const route = await this.model.findByPk(routeId);
+    return route;
+  }
 }

@@ -17,11 +17,19 @@ router.get(
 
 router.patch(
   '/:routeId/remove/:collaboratorId',
+  validateAuth.validateAccessToken,
   (req: Request, res: Response) => routesController.removeCollaboratorFromRoute(req, res),
 );
 
 router.patch(
   '/:routeId/add/:collaboratorId',
+  validateAuth.validateAccessToken,
   (req: Request, res: Response) => routesController.addCollaboratorToRoute(req, res),
+);
+
+router.patch(
+  '/:routeId/last-update',
+  validateAuth.validateAccessToken,
+  (req: Request, res: Response) => routesController.updateLastUpdate(req, res),
 );
 export default router;
