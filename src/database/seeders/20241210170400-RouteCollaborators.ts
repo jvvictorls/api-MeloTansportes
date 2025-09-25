@@ -1,7 +1,6 @@
 'use strict'
 
 import { QueryInterface, Sequelize } from 'sequelize'
-import SequelizeRoutesCollaborators from '../models/SequelizeRoutesCollaborators'
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
