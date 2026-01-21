@@ -20,6 +20,10 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
+      },
       date: {
         type: DataTypes.DATE,
         allowNull: false,

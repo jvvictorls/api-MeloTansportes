@@ -5,6 +5,7 @@ export async function up(queryInterface: QueryInterface) {
     {
       origin: 'Fábrica',
       destination: 'Residência',
+      price: 188.77,
       date: new Date(),
       time: '08:00',
       cost_center: 'Development',
@@ -18,6 +19,7 @@ export async function up(queryInterface: QueryInterface) {
     {
       origin: 'Residência',
       destination: 'Fábrica',
+      price: 125.84,
       date: new Date(),
       time: '20:00',
       cost_center: 'Design',

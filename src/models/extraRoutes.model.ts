@@ -13,6 +13,7 @@ export default class ExtraRoutesModel {
         {
           origin: data.origin,
           destination: data.destination,
+          price: data.price,
           time: data.time,
           costCenter: data.costCenter,
           date: data.date,
@@ -45,6 +46,7 @@ export default class ExtraRoutesModel {
         id: extraRoute.id,
         origin: extraRoute.origin,
         destination: extraRoute.destination,
+        price: extraRoute.price,
         date: extraRoute.date,
         time: extraRoute.time,
         costCenter: extraRoute.costCenter,
@@ -101,6 +103,7 @@ export default class ExtraRoutesModel {
       const transformedExtraRoute: IExtraRoutes = {
         origin: extraRoute.origin,
         destination: extraRoute.destination,
+        price: extraRoute.price,
         id: extraRoute.id,
         date: extraRoute.date,
         time: extraRoute.time,

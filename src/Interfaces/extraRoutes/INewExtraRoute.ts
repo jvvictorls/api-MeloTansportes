@@ -3,6 +3,7 @@
 interface INewExtraRoute {
   userId: number;
   origin: string;
+  price: number;
   destination: string;
   date: Date
   time: string;

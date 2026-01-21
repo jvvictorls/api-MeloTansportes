@@ -15,6 +15,7 @@ InferCreationAttributes<SequelizeExtraRoutes>> {
   declare id: CreationOptional<number>;
   declare origin: string;
   declare destination: string;
+  declare price: number;
   declare userId: number;
   declare date: Date;
   declare time: string;
@@ -56,6 +57,10 @@ SequelizeExtraRoutes.init({
   },
   destination: {
     type: DataTypes.STRING,
+    allowNull: false,
+  },
+  price: {
+    type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
   },
   time: {

@@ -2,6 +2,7 @@ export default interface IExtraRoutes {
   id: number,
   origin: string,
   destination: string,
+  price: number,
   date: Date,
   costCenter: string,
   userId: number,
