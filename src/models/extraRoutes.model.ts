@@ -127,4 +127,22 @@ export default class ExtraRoutesModel {
       throw error;
     }
   }
+
+  getExtraRoutes() {
+    return this.model.findAll({
+      include: [
+        {
+          model: SequelizeCollaborators,
+          as: 'collaborators',
+          through: { attributes: [] },
+          attributes: ['id', 'name'],
+        },
+        {
+          model: SequelizeUsers,
+          as: 'user',
+          attributes: ['id', 'name'],
+        }
+      ]
+    })
+  }
 }

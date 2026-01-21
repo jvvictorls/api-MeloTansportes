@@ -17,4 +17,8 @@ export default class ExtraRoutesService {
   async getExtraRouteById(id: number): Promise<any> {
     return this.extraRoutesModel.getExtraRouteById(id);
   }
+
+  async getExtraRoutes(): Promise<any> {
+    return this.extraRoutesModel.getExtraRoutes();
+  }
 }

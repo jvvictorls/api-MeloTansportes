@@ -12,6 +12,13 @@ router.get(
     extraRoutesController.getExtraRouteById(req, res),
 );
 
+router.get(
+  '/',
+  ValidateAuth.validateAccessToken,
+  async (req: Request, res: Response) =>
+    extraRoutesController.getExtraRoutes(req, res),
+)
+
 router.post(
   '/',
   ValidateAuth.validateAccessToken,

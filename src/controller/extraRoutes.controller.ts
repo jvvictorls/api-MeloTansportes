@@ -32,4 +32,13 @@ export default class ExtraRoutesController {
       res.status(400).json({ error: error.message });
     }
   }
+
+  async getExtraRoutes(req: any, res: any): Promise<any> {
+    try {
+      const extraRoutes = await this.extraRoutesService.getExtraRoutes();
+      res.status(200).json(extraRoutes);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  }
 }
