@@ -8,7 +8,7 @@ module.exports = {
    await queryInterface.bulkInsert('collaborators', [
     {
       admission_date: new Date(),
-      name: 'Fernanda Silva',
+      name: 'Alisson Medrado',
       shift: 'A',
       phone: '98999999999',
       zip_code: '65000-000',
@@ -24,7 +24,7 @@ module.exports = {
     },
     {
       admission_date: new Date(),
-      name: 'Camila Perez',
+      name: 'Karoline Gonçalves',
       shift: 'B',
       phone: '98999999999',
       zip_code: '65000-000',

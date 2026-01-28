@@ -14,14 +14,14 @@ module.exports = {
       type: 'superadmin'
       },
       {
-      name: 'Maria Silva',
-      email: 'maria@dev.com',
+      name: 'Alisson Medrado',
+      email: 'alisson@dev.com',
       password: bcrypt.hashSync('senha123', 10),
       type: 'admin'
       },
       {
-      name: 'Pedro Oliveira',
-      email: 'pedro@dev.com',
+      name: 'Karoline Gonçalves',
+      email: 'karoline@dev.com',
       password: bcrypt.hashSync('senha123', 10),
       type: 'driver'
       },
