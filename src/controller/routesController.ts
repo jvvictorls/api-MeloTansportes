@@ -20,6 +20,13 @@ export default class RoutesController {
     return res.status(200).json(data);
   }
 
+  async getRouteByName(req: Request, res: Response) {
+    const { name } = req.params;
+    const { status, data } = await this.routesService.getRouteByName(name);
+    if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
+    return res.status(200).json(data);
+  }
+
   async removeCollaboratorFromRoute(req: Request, res: Response) {
     const { routeId, collaboratorId } = req.params;
     const { status, data } = await this.routesService.removeCollaboratorFromRoute(

@@ -4,6 +4,7 @@ import validateAuth from '../middlewares/validateAuth';
 
 const router = Router();
 const routesController = new RoutesController();
+
 router.get(
   '/:id',
   (req: Request, res: Response) => routesController.getOneRoute(req, res),
@@ -14,6 +15,12 @@ router.get(
   validateAuth.validateAccessToken,
   (req: Request, res:Response) => routesController.getAllRoutes(req, res),
 );
+
+router.get(
+  '/username/:name',
+  validateAuth.validateAccessToken,
+  (req: Request, res: Response) => routesController.getRouteByName(req, res),
+)
 
 router.patch(
   '/:routeId/remove/:collaboratorId',

@@ -1,5 +1,5 @@
 import IRoutesModel from '../Interfaces/Routes/IRoutesModel';
-import { IRoutes } from '../Interfaces/Routes/IRoutes';
+import { IRoutes, RoutesFromDb } from '../Interfaces/Routes/IRoutes';
 import SequelizeRoutes from '../database/models/SequelizeRoutes';
 import SequelizeCollaborators from '../database/models/SequelizeCollaborators';
 
@@ -8,7 +8,7 @@ export default class RoutesModel implements IRoutesModel {
 
   private collaboratorModel = SequelizeCollaborators;
 
-  async getAllRoutes(): Promise<IRoutes[]> {
+  async getAllRoutes(): Promise<RoutesFromDb[]> {
     const routes = await this.model.findAll({
       include: [
         {
@@ -25,7 +25,7 @@ export default class RoutesModel implements IRoutesModel {
     return routes;
   }
 
-  async getRouteById(id: number): Promise<IRoutes | null> {
+  async getRouteById(id: number): Promise<RoutesFromDb | null> {
     const route = await this.model.findByPk(id, {
       include: [
         {
