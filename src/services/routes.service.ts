@@ -37,7 +37,7 @@ export default class RoutesService {
     };
   }
 
-  async getRouteByName(name: string): Promise<ServiceResponse<RoutesFromDb>> {
+  async getRouteByName(name: string): Promise<ServiceResponse<RoutesFromDb[]>> {
     const routes = await this.routesModel.getAllRoutes();
     const findRouteByCollaboratorName = routes.filter((route: RoutesFromDb) => route.collaborators
       ?.some((collaborator) => collaborator.name.toLowerCase().includes(name.toLowerCase())));
@@ -49,7 +49,7 @@ export default class RoutesService {
     }
     return {
       status: 'SUCCESSFUL',
-      data: findRouteByCollaboratorName[0],
+      data: findRouteByCollaboratorName,
     };
   }
 
