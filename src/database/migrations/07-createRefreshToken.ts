@@ -1,9 +1,8 @@
 import { DataTypes, QueryInterface, Model } from 'sequelize'
-import IRefreshToken from '../../Interfaces/refreshToken/IRefreshToken'
 
 export default {
   up: async (queryInterface: QueryInterface) => {
-    await queryInterface.createTable<Model<IRefreshToken>>('refresh_token', {
+    await queryInterface.createTable<Model>('refresh_token', {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,

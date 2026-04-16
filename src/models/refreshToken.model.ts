@@ -5,17 +5,17 @@ import INewRefreshToken from '../Interfaces/refreshToken/INewRefreshToken';
 class RefreshTokenModel {
   private sequelizeRefreshToken = SequelizeRefreshToken;
 
-  async create(refreshToken: INewRefreshToken): Promise<IRefreshToken> {
+  async create(refreshToken: INewRefreshToken) {
     const newRefreshToken = await this.sequelizeRefreshToken.create(refreshToken);
     return newRefreshToken;
   }
 
-  async findByID(id: number): Promise<IRefreshToken | null> {
+  async findByID(id: number)  {
     const findRefreshToken = await this.sequelizeRefreshToken.findByPk(id);
     return findRefreshToken;
   }
 
-  async findByToken(token: string): Promise<IRefreshToken | undefined> {
+  async findByToken(token: string) {
     const findRefreshToken = await this.sequelizeRefreshToken.findOne({ where: { token } });
     return findRefreshToken?.dataValues;
   }

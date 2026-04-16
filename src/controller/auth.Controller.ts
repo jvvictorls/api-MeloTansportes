@@ -20,8 +20,13 @@ class AuthController {
   async refreshAccessToken(req: Request, res: Response) {
     const { refreshToken } = req.cookies;
     const { status, data } = await this.authService.refreshToken(refreshToken);
-    if (status !== 'SUCCESSFUL' || !data) return res.status(mapStatusHTTP(status)).json(data);
-    return res.status(200).json(data);
+    if (status !== 'SUCCESSFUL' || !data) {
+      res.clearCookie('refreshToken');
+      return res.status(mapStatusHTTP(status)).json(data);
+    }
+    const {accessToken, refreshToken: newRefreshToken} = data;
+    res.cookie('refreshToken', newRefreshToken, { httpOnly: true, sameSite: 'strict', secure: true });
+    return res.status(200).json({ accessToken });
   }
 
   async logout(req: Request, res: Response) {
@@ -34,7 +39,7 @@ class AuthController {
 
   async getUserByToken(req: Request, res: Response) {
     const { refreshToken } = req.cookies;
-    const { status, data } = await this.authService.findByToken(refreshToken);
+    const { status, data } = await this.authService.getUserFromToken(refreshToken);
     if (status !== 'SUCCESSFUL' || !data) return res.status(mapStatusHTTP(status)).json(data);
     return res.status(200).json(data.userId);
   }
