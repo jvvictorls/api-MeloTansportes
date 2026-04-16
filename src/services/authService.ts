@@ -6,6 +6,8 @@ import { ServiceResponse } from '../utils/serviceResponse';
 import ILogin from '../Interfaces/Users/ILogin';
 import UsersModel from '../models/users.model';
 import crypto from 'crypto';
+import IUsersFromDb from '../Interfaces/Users/IUsersFromDb';
+import { password } from '../database/config/database';
 
 class RefreshTokenService {
   private refreshTokenModel = new RefreshTokenModel();
@@ -16,9 +18,9 @@ class RefreshTokenService {
     return crypto.createHash('sha256').update(token).digest('hex');
   }
 
-  private generateTokens(user: { email: string; type: string; id: number }): { accessToken: string; refreshToken: string } {
+  private generateTokens(user: { name: string; type: string; id: number }): { accessToken: string; refreshToken: string } {
     const accessToken = this.jwt.sign(
-      {id: user.id, email: user.email, type: user.type},
+      {id: user.id, name: user.name, type: user.type},
       '15m',
     );
     const refreshToken = this.jwt.sign({ id: user.id }, '7d');
@@ -102,22 +104,23 @@ class RefreshTokenService {
     refreshToken: string
   }>> {
     const userExists = await this.usersModel.findByEmail(user.email);
+
     if (!userExists) return { status: 'INVALID_DATA', data: { message: 'User dont exists' } };
-    if (!bcrypt.compareSync(user.password, userExists.password)) {
+    if (!bcrypt.compare(user.password, userExists.password)) {
       return { status: 'INVALID_DATA',
         data: { message: 'incorrect password' },
       };
     }
-    const { email, type, id } = userExists;
-    const accessToken = this.jwt.sign({ email, type, id }, '15m');
-    const refreshToken = this.jwt.sign({ id }, '7d');
-    const hash = crypto.createHash('sha256').update(refreshToken).digest('hex');
+    const tokens = this.generateTokens({ name: userExists.name, type: userExists.type, id: userExists.id });
+
+    const hash = this.hashToken(tokens.refreshToken);
+    
     await this.refreshTokenModel.create({ userId: userExists.id,
       token: hash,
       createdAt: new Date(),
       expiresIn: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
     });
-    return { status: 'SUCCESSFUL', data: { accessToken, refreshToken } };
+    return { status: 'SUCCESSFUL', data:  tokens };
   }
 
   async refreshToken(oldRefreshToken: string): Promise<ServiceResponse<{accessToken: string; refreshToken: string}>> {
@@ -147,7 +150,7 @@ class RefreshTokenService {
 
       await this.refreshTokenModel.delete(stored.id);
 
-      const tokens = this.generateTokens({ email: user.email, type: user.type, id: user.id });
+      const tokens = this.generateTokens({ name: user.name, type: user.type, id: user.id });
       const newHash = this.hashToken(tokens.refreshToken);
 
       await this.refreshTokenModel.create({ userId: user.id,
@@ -183,7 +186,7 @@ class RefreshTokenService {
     return { status: 'SUCCESSFUL', data: 'Logout successful' };
   }
 
-  async getUserFromToken(token: string): Promise<ServiceResponse<{ userId: number }>> {
+  async getUserFromToken(token: string): Promise<ServiceResponse<IUsersFromDb>> {
     if (!token) {
       return { status: 'INVALID_DATA', data: { message: 'missing token' } };
     }
@@ -191,7 +194,20 @@ class RefreshTokenService {
     try {
       const decoded = this.jwt.verify(token) as { id: number };
 
-      return { status: 'SUCCESSFUL', data: { userId: decoded.id } };
+      const user = await this.usersModel.findById(decoded.id);
+      
+      if(!user) {
+        return { status: 'NOT_FOUND', data: { message: 'User not found' } };
+      }
+
+      const userWithoutPassword = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        type: user.type,
+      };
+
+      return { status: 'SUCCESSFUL', data: userWithoutPassword  };
     } catch (e: any) {
       return { status: 'UNAUTHORIZED', data: { message: e.message } };
     }
