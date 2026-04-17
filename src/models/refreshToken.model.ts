@@ -27,10 +27,11 @@ class RefreshTokenModel {
     );
   }
 
-  async delete(id: number): Promise<SequelizeRefreshToken | null> {
-    await this.sequelizeRefreshToken.destroy({ where: { id } });
-    const deletedRefreshToken = await this.sequelizeRefreshToken.findByPk(id);
-    return deletedRefreshToken;
+  async delete(id: number): Promise<boolean> {
+  const deletedCount = await this.sequelizeRefreshToken.destroy({
+    where: { id },
+  });
+  return deletedCount > 0;
   }
 }
 

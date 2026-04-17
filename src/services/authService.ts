@@ -89,16 +89,18 @@ class RefreshTokenService {
     return updatedRefreshToken;
   }
 
-  async delete(id: number): Promise<ServiceResponse<IRefreshToken | null>> {
-    const deleteRefreshToken = await this.refreshTokenModel.delete(id);
-    if (deleteRefreshToken) {
-      return {
-        status: 'INTERNAL_SERVER_ERROR',
-        data: { message: 'Failed to delete refreshToken' },
-      };
-    }
-    return { status: 'SUCCESSFUL' };
+  async delete(id: number): Promise<ServiceResponse<null>> {
+  const deleted = await this.refreshTokenModel.delete(id);
+
+  if (!deleted) {
+    return {
+      status: 'NOT_FOUND',
+      data: { message: 'Token not found' },
+    };
   }
+
+  return { status: 'SUCCESSFUL', data: null };
+}
 
   async login(user: ILogin): Promise<ServiceResponse<{ accessToken: string;
     refreshToken: string

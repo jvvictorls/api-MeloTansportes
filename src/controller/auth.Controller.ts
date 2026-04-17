@@ -2,6 +2,13 @@ import { Request, Response } from 'express';
 import mapStatusHTTP from '../utils/mapStatusHttp';
 import AuthService from '../services/authService';
 
+const isProduction = process.env.NODE_ENV === 'production';
+const cookieOptions = {
+  httpOnly: true,
+  sameSite:isProduction ?'none' as const : 'lax' as const,
+  secure: isProduction,
+};
+
 class AuthController {
   constructor(
     private authService = new AuthService(),
@@ -13,7 +20,7 @@ class AuthController {
     const { status, data } = await this.authService.login({ email, password });
     if (status !== 'SUCCESSFUL' || !data) return res.status(mapStatusHTTP(status)).json(data);
     const { accessToken, refreshToken } = data;
-    res.cookie('refreshToken', refreshToken, { httpOnly: true, sameSite: 'strict', secure: true });
+    res.cookie('refreshToken', refreshToken, cookieOptions);
     return res.status(200).json({ accessToken });
   }
 
@@ -25,15 +32,25 @@ class AuthController {
       return res.status(mapStatusHTTP(status)).json(data);
     }
     const {accessToken, refreshToken: newRefreshToken} = data;
-    res.cookie('refreshToken', newRefreshToken, { httpOnly: true, sameSite: 'strict', secure: true });
+    res.cookie('refreshToken', newRefreshToken, cookieOptions);
     return res.status(200).json({ accessToken });
   }
 
   async logout(req: Request, res: Response) {
     const { refreshToken } = req.cookies;
+
+    if (!refreshToken) {
+      return res.status(400).json({ message: 'Refresh token not provided' });
+    }
+
     const { status, data } = await this.authService.logout(refreshToken);
-    if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
+
+    if (status !== 'SUCCESSFUL') {
+      return res.status(mapStatusHTTP(status)).json(data);
+    }
+
     res.clearCookie('refreshToken');
+
     return res.status(200).json(data);
   }
 
