@@ -53,13 +53,6 @@ class AuthController {
 
     return res.status(200).json(data);
   }
-
-  async getUserByToken(req: Request, res: Response) {
-    const { refreshToken } = req.cookies;
-    const { status, data } = await this.authService.getUserFromToken(refreshToken);
-    if (status !== 'SUCCESSFUL' || !data) return res.status(mapStatusHTTP(status)).json(data);
-    return res.status(200).json(data);
-  }
 }
 
 export default AuthController;

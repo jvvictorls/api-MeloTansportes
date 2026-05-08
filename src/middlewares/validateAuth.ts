@@ -15,6 +15,7 @@ class ValidateAuth {
         return res.status(401).json({ data: { message: 'Invalid token format' } });
       }
       const decoded = JWT.verify(token); // Aqui pode lançar erro se o token for inválido
+      console.log('Decoded token:', decoded); // Log para debug
       req.user = decoded; // Salva as informações do usuário no request
       next(); // Chama o próximo middleware
     } catch (error) {

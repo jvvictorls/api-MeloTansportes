@@ -4,11 +4,18 @@ import ValidateAuth from '../middlewares/validateAuth';
 
 const router = Router();
 const usersController = new UsersController();
+
 router.get(
   '/',
   ValidateAuth.validateAccessToken,
   (req: Request, res: Response) => usersController.findAll(req, res),
 );
+
+router.get( 
+  '/me',
+  ValidateAuth.validateAccessToken,
+  (req: Request, res: Response) => usersController.getMe(req, res),
+)
 
 router.get(
   '/:id',

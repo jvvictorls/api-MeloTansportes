@@ -1,4 +1,5 @@
 import { JwtPayload, Secret, sign, verify } from 'jsonwebtoken';
+import {IUserJwtPayload} from '../Interfaces/Express/RequestWithUser';
 
 export default class JWT {
   private static secret: Secret = process.env.JWT_SECRET || 'secret';
@@ -7,7 +8,7 @@ export default class JWT {
     return sign(payload, this.secret, { expiresIn, algorithm: 'HS256' });
   }
 
-  static verify(token: string): JwtPayload | string {
-    return verify(token, this.secret) as JwtPayload;
+  static verify(token: string): IUserJwtPayload {
+    return verify(token, this.secret) as IUserJwtPayload;
   }
 }

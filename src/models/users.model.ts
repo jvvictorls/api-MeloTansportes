@@ -5,41 +5,45 @@ import SequelizeUsers from '../database/models/SequelizeUsers';
 export default class UsersModel implements IUsersModel {
   private model = SequelizeUsers;
 
-  async findAll(): Promise<IUsers[] | null> {
-    const findAllUsers = await this.model.findAll();
-    if (findAllUsers.length === 0) return null;
-    return findAllUsers;
+  private toEntity(user: any): IUsers {
+    return user.get({ plain: true });
+  }
+
+  async findAll(): Promise<IUsers[]> {
+    const users = await this.model.findAll();
+    return users.map((u) => this.toEntity(u));
   }
 
   async findById(id: number): Promise<IUsers | null> {
-    const findUser = await this.model.findByPk(id);
-    if (!findUser) return null;
-    return findUser.dataValues;
+    const user = await this.model.findByPk(id);
+    if (!user) return null;
+
+    return this.toEntity(user);
   }
 
   async findByEmail(email: string): Promise<IUsers | null> {
-    const findUser = await this.model.findOne({ where: { email } });
-    if (!findUser) return null;
-    const { dataValues } = findUser;
-    return dataValues;
+    const user = await this.model.findOne({ where: { email } });
+    if (!user) return null;
+
+    return this.toEntity(user);
   }
 
   async create(user: IUsers): Promise<IUsers> {
-    const { dataValues } = await this.model.create(user);
-    return dataValues;
+    const created = await this.model.create(user);
+    return this.toEntity(created);
   }
 
   async update(id: number, user: IUsers): Promise<IUsers | null> {
-    const [affectedRows] = await this.model.update(user, { where: { id } });
-    if (affectedRows < 0) {
-      return null;
-    }
-    const updatedUser = await this.findById(id);
-    return updatedUser;
+    const [affectedRows] = await this.model.update(user, {
+      where: { id },
+    });
+
+    if (affectedRows === 0) return null;
+
+    return this.findById(id);
   }
 
   async delete(id: number): Promise<number> {
-    const deleteUser = await this.model.destroy({ where: { id } });
-    return deleteUser;
+    return this.model.destroy({ where: { id } });
   }
 }

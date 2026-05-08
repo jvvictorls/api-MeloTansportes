@@ -7,15 +7,18 @@ import ILogin from '../Interfaces/Users/ILogin';
 import UsersModel from '../models/users.model';
 import crypto from 'crypto';
 import IUsersFromDb from '../Interfaces/Users/IUsersFromDb';
-import { password } from '../database/config/database';
 
-class RefreshTokenService {
+class AuthService {
   private refreshTokenModel = new RefreshTokenModel();
   private jwt = JWT;
   private usersModel = new UsersModel();
 
   private hashToken(token: string): string {
     return crypto.createHash('sha256').update(token).digest('hex');
+  }
+
+  private async isValidPassword(user: ILogin, userExists: IUsersFromDb): Promise<boolean> {
+    return await bcrypt.compare(user.password, userExists.password);
   }
 
   private generateTokens(user: { name: string; type: string; id: number }): { accessToken: string; refreshToken: string } {
@@ -108,7 +111,7 @@ class RefreshTokenService {
     const userExists = await this.usersModel.findByEmail(user.email);
 
     if (!userExists) return { status: 'INVALID_DATA', data: { message: 'User dont exists' } };
-    if (!bcrypt.compare(user.password, userExists.password)) {
+    if (!await this.isValidPassword(user, userExists)) {
       return { status: 'INVALID_DATA',
         data: { message: 'incorrect password' },
       };
@@ -144,7 +147,7 @@ class RefreshTokenService {
     }
 
     try {
-      const decoded = this.jwt.verify(oldRefreshToken) as { id: number};
+      const decoded = this.jwt.verify(oldRefreshToken);
       const user = await this.usersModel.findById(decoded.id); 
       if (!user) {
         return { status: 'UNAUTHORIZED', data: { message: 'User not found' } };
@@ -187,33 +190,6 @@ class RefreshTokenService {
 
     return { status: 'SUCCESSFUL', data: 'Logout successful' };
   }
-
-  async getUserFromToken(token: string): Promise<ServiceResponse<IUsersFromDb>> {
-    if (!token) {
-      return { status: 'INVALID_DATA', data: { message: 'missing token' } };
-    }
-
-    try {
-      const decoded = this.jwt.verify(token) as { id: number };
-
-      const user = await this.usersModel.findById(decoded.id);
-      
-      if(!user) {
-        return { status: 'NOT_FOUND', data: { message: 'User not found' } };
-      }
-
-      const userWithoutPassword = {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        type: user.type,
-      };
-
-      return { status: 'SUCCESSFUL', data: userWithoutPassword  };
-    } catch (e: any) {
-      return { status: 'UNAUTHORIZED', data: { message: e.message } };
-    }
-  }
 }
 
-export default RefreshTokenService;
+export default AuthService;

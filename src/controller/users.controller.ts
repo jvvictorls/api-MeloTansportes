@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import RequestWithUser from '../Interfaces/Express/RequestWithUser';
 import UsersService from '../services/users.service';
 import mapStatusHTTP from '../utils/mapStatusHttp';
 
@@ -52,4 +53,22 @@ export default class UsersController {
     if (status !== 'SUCCESSFUL') return res.status(mapStatusHTTP(status)).json(data);
     return res.status(200).json(data);
   }
+
+  async getMe(req: RequestWithUser, res: Response) {
+  if (!req.user) {
+    return res.status(401).json({
+      message: 'Unauthorized',
+    });
+  }
+
+  const userId = req.user.id;
+
+  const { status, data } = await this.usersService.getMe(userId);
+
+  if (status !== 'SUCCESSFUL') {
+    return res.status(mapStatusHTTP(status)).json(data);
+  }
+
+  return res.status(200).json(data);
+}
 }
